@@ -28,6 +28,7 @@ pylint = "*"
 pylint-django = "*"
 yamllint = "*"
 Markdown = "*"
+Faker = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
