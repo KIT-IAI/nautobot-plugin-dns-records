@@ -39,7 +39,7 @@ class Record(models.Model):
 
         Encodes the label field with the IDNA2003 rules
         """
-        self.label = codecs.encode(self.label, encoding="idna")
+        self.label = codecs.encode(self.label, encoding="idna").decode()
         super().save()
 
     def __str__(self):

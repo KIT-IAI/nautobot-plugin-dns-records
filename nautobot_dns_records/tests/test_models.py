@@ -48,4 +48,4 @@ class RecordTestCase(AbstractModelMixinTestCase):
     def test_record_idna_encoding(self):
         record = self.model(label="💩.test", ttl=1)
         record.save()
-        self.assertEqual(record.label, b"xn--ls8h.test")
+        self.assertEqual(record.label, "xn--ls8h.test")
