@@ -64,6 +64,7 @@ class RecordTestCase(AbstractModelMixinTestCase):
 
 
 class AddressRecordTestCase(TestCase):
+    """Test the AddressRecord Model"""
     def setUp(self):
         self.test_ipv4 = IPAddress(address=random_ipv4_address())
         self.test_ipv6 = IPAddress(address=random_ipv6_address())
