@@ -2,9 +2,16 @@
 
 import django.db.models.fields
 from django.core.exceptions import ValidationError
+from nautobot.utilities.testing import TestCase
+from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record
-from nautobot_dns_records.tests.helpers import random_valid_dns_ttl, random_valid_dns_name
+from nautobot_dns_records.models import Record, AddressRecord
+from nautobot_dns_records.tests.helpers import (
+    random_valid_dns_ttl,
+    random_valid_dns_name,
+    random_ipv4_address,
+    random_ipv6_address,
+)
 from nautobot_dns_records.tests.mixins import AbstractModelMixinTestCase
 
 
@@ -54,3 +61,17 @@ class RecordTestCase(AbstractModelMixinTestCase):
         record = self.model(label=random_valid_dns_name(), ttl=1)
         record.save()
         self.assertEqual(record.__str__(), record.label)
+
+
+class AddressRecordTestCase(TestCase):
+    def setUp(self):
+        self.test_ipv4 = IPAddress(address=random_ipv4_address())
+        self.test_ipv6 = IPAddress(address=random_ipv6_address())
+
+    def test_record_creation_ipv4(self):
+        record_v4 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv4)
+        self.assertEqual(record_v4.address, self.test_ipv4)
+
+    def test_record_creation_ipv6(self):
+        record_v6 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
+        self.assertEqual(record_v6.address, self.test_ipv6)

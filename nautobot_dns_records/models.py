@@ -2,11 +2,15 @@
 
 import codecs
 
+import nautobot.ipam.models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from nautobot_dns_records.validators import validate_dns_name
+
+from nautobot.core.models.generics import PrimaryModel
+from nautobot.extras.utils import extras_features
 
 
 class Record(models.Model):
@@ -45,3 +49,23 @@ class Record(models.Model):
     def __str__(self):
         """Return the label field."""
         return self.label
+
+
+@extras_features(
+    "custom_fields",
+    "graphql",
+    "statuses",
+)
+class AddressRecord(PrimaryModel, Record):
+    """Class that represents A and AAAA record
+
+    Attributes:
+        address (nautobot.ipam.models.IPAddress)
+    """
+
+    address = models.ForeignKey(
+        nautobot.ipam.models.IPAddress,
+        on_delete=models.CASCADE,
+        verbose_name=_("IP Address"),
+        help_text=_("Related IP Address for the record."),
+    )
