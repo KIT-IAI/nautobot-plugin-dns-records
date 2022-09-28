@@ -49,3 +49,8 @@ class RecordTestCase(AbstractModelMixinTestCase):
         record = self.model(label="💩.test", ttl=1)
         record.save()
         self.assertEqual(record.label, "xn--ls8h.test")
+
+    def test_str(self):
+        record = self.model(label=random_valid_dns_name(), ttl=1)
+        record.save()
+        self.assertEqual(record.__str__(), record.label)
