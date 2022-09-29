@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record, AddressRecord
+from nautobot_dns_records.models import Record, AddressRecord, CNameRecord
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -65,6 +65,7 @@ class RecordTestCase(AbstractModelMixinTestCase):
 
 class AddressRecordTestCase(TestCase):
     """Test the AddressRecord Model"""
+
     def setUp(self):
         self.test_ipv4 = IPAddress(address=random_ipv4_address())
         self.test_ipv6 = IPAddress(address=random_ipv6_address())
@@ -76,3 +77,17 @@ class AddressRecordTestCase(TestCase):
     def test_record_creation_ipv6(self):
         record_v6 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
         self.assertEqual(record_v6.address, self.test_ipv6)
+
+
+class CNameRecordTestCase(TestCase):
+    """Test the CNameRecord Model"""
+
+    def test_record_creation(self):
+        target = random_valid_dns_name()
+        record = CNameRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target=target)
+        self.assertEqual(record.target, target)
+
+    def test_record_target_encoding(self):
+        record = CNameRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target="💩.test")
+        record.save()
+        self.assertEqual(record.target, "xn--ls8h.test")

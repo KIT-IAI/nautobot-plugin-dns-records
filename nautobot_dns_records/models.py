@@ -6,11 +6,10 @@ import nautobot.ipam.models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-from nautobot_dns_records.validators import validate_dns_name
-
 from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.utils import extras_features
+
+from nautobot_dns_records.validators import validate_dns_name
 
 
 class Record(models.Model):
@@ -69,3 +68,26 @@ class AddressRecord(PrimaryModel, Record):
         verbose_name=_("IP Address"),
         help_text=_("Related IP Address for the record."),
     )
+
+
+class CNameRecord(PrimaryModel, Record):
+    """Class that represents a CNAME record
+
+    Attributes:
+        target (CharField)
+    """
+
+    target = models.CharField(
+        max_length=255,
+        validators=[validate_dns_name],
+        verbose_name=_("DNS Alias Target"),
+        help_text=_("The target of the CNAME Record"),
+    )
+
+    def save(self, *args, **kwargs):
+        """Override the default django save method.
+
+        Encodes the target field with the IDNA2003 rules
+        """
+        self.target = codecs.encode(self.target, encoding="idna").decode()
+        super().save()
