@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record, AddressRecord, CNameRecord
+from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -91,3 +91,12 @@ class CNameRecordTestCase(TestCase):
         record = CNameRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target="💩.test")
         record.save()
         self.assertEqual(record.target, "xn--ls8h.test")
+
+
+class TxtRecordTestCase(TestCase):
+    """Test the TxtRecord Model"""
+
+    def test_txt_record_creation(self):
+        value = "This is a test!"
+        record = TxtRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), value=value)
+        self.assertEqual(record.value, value)

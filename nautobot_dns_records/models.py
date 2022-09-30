@@ -91,3 +91,13 @@ class CNameRecord(PrimaryModel, Record):
         """
         self.target = codecs.encode(self.target, encoding="idna").decode()
         super().save()
+
+
+class TxtRecord(PrimaryModel, Record):
+    """Class that represents a TXT record
+
+    Attributes:
+        value (CharField)
+    """
+
+    value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
