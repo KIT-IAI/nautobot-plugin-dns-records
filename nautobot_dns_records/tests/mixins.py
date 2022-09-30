@@ -42,3 +42,6 @@ class AbstractModelMixinTestCase(TestCase):
             super(AbstractModelMixinTestCase, cls).tearDownClass()
         except ProgrammingError:
             pass
+        except OperationalError:
+            pass
+        super().tearDownClass()
