@@ -70,6 +70,11 @@ class AddressRecord(PrimaryModel, Record):
     )
 
 
+@extras_features(
+    "custom_fields",
+    "graphql",
+    "statuses",
+)
 class CNameRecord(PrimaryModel, Record):
     """Class that represents a CNAME record
 
@@ -93,6 +98,11 @@ class CNameRecord(PrimaryModel, Record):
         super().save()
 
 
+@extras_features(
+    "custom_fields",
+    "graphql",
+    "statuses",
+)
 class TxtRecord(PrimaryModel, Record):
     """Class that represents a TXT record
 
