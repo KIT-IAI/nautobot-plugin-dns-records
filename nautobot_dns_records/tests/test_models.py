@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord
+from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -330,3 +330,19 @@ class LocRecordTestCase(TestCase):
         ):
             record.precision = 90000000.01
             record.clean_fields()
+
+
+class PtrRecordTestCase(TestCase):
+    """Test the PtrRecord Model."""
+
+    def setUp(self):
+        self.test_ipv4 = IPAddress(address=random_ipv4_address())
+        self.test_ipv6 = IPAddress(address=random_ipv6_address())
+
+    def test_ptr_record_creation_ipv4(self):
+        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv4)
+        self.assertEqual(record.address, self.test_ipv4)
+
+    def test_ptr_record_creation_ipv6(self):
+        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
+        self.assertEqual(record.address, self.test_ipv6)

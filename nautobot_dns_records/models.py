@@ -197,3 +197,19 @@ class LocRecord(PrimaryModel, Record):
         decimal_places=2,
         max_digits=10,
     )
+
+
+@extras_features("custom_fields", "graphql", "statuses")
+class PtrRecord(PrimaryModel, Record):
+    """Class that represents a PTR record
+
+    Attributes:
+        address (nautobot.ipam.models.IPAddress)
+    """
+
+    address = models.ForeignKey(
+        nautobot.ipam.models.IPAddress,
+        on_delete=models.CASCADE,
+        verbose_name=_("IP Address"),
+        help_text=_("Related IP Address for the record."),
+    )
