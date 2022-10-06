@@ -10,6 +10,7 @@ from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.utils import extras_features
 
 from nautobot_dns_records.validators import validate_dns_name
+from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS
 
 
 class Record(models.Model):
@@ -111,3 +112,88 @@ class TxtRecord(PrimaryModel, Record):
     """
 
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
+
+
+@extras_features(
+    "custom_fields",
+    "graphql",
+    "statuses",
+)
+class LocRecord(PrimaryModel, Record):
+    """Class that represents a LOC record.
+
+    Attributes
+        degLat (IntegerField): degrees latitude
+        degLong (IntegerField): degrees longitude
+        minLat (IntegerField): minutes latitude
+        minLong (IntegerField): minutes longitude
+        secLat (DecimalField): seconds latitude
+        secLong (DecimalField): seconds longitude
+        altitude (DecimalField): altitude
+        precision (DecimalField): precision
+        dirLat (CharField): direction for degrees latitude
+        dirLong (CharField): direction for degrees longitude
+    """
+
+    degLat = models.IntegerField(
+        verbose_name=_("degrees latitude"),
+        help_text=_("The degree of latitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(90)],
+    )
+    degLong = models.IntegerField(
+        verbose_name=_("degrees longitude"),
+        help_text=_("The degree of longitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(180)],
+    )
+    minLat = models.IntegerField(
+        verbose_name=_("minutes latitude"),
+        help_text=_("The minutes of latitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(59)],
+    )
+    minLong = models.IntegerField(
+        verbose_name=_("minutes longitude"),
+        help_text=_("The minutes of longitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(59)],
+    )
+    secLat = models.DecimalField(
+        verbose_name=_("seconds latitude"),
+        help_text=_("The seconds of latitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(59.999)],
+        decimal_places=3,
+        max_digits=5,
+    )
+    secLong = models.DecimalField(
+        verbose_name=_("seconds longitude"),
+        help_text=_("The seconds of longitude"),
+        validators=[MinValueValidator(0), MaxValueValidator(59.999)],
+        decimal_places=3,
+        max_digits=5,
+    )
+    altitude = models.DecimalField(
+        verbose_name=_("altitude"),
+        help_text=_("altitude of the point"),
+        validators=[MinValueValidator(-100000), MaxValueValidator(42849672.95)],
+        decimal_places=2,
+        max_digits=10,
+    )
+    dirLat = models.CharField(
+        verbose_name=_("latitude direction"),
+        help_text=_("The alignment of the latitude"),
+        choices=LATITUDE_DIRECTIONS,
+        default="N",
+        max_length=1,
+    )
+    dirLong = models.CharField(
+        verbose_name=_("longitude direction"),
+        help_text=_("The alignment of the longitude"),
+        choices=LONGITUDE_DIRECTIONS,
+        default="E",
+        max_length=1,
+    )
+    precision = models.DecimalField(
+        verbose_name=_("precision"),
+        help_text=_("precision of the coordinate"),
+        validators=[MinValueValidator(0), MaxValueValidator(90000000.00)],
+        decimal_places=2,
+        max_digits=10,
+    )

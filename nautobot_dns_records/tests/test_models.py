@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord
+from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -100,3 +100,233 @@ class TxtRecordTestCase(TestCase):
         value = "This is a test!"
         record = TxtRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), value=value)
         self.assertEqual(record.value, value)
+
+
+class LocRecordTestCase(TestCase):
+    """Test the LocRecord Model"""
+
+    def test_loc_record_creation(self):
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        record.save()
+        self.assertEqual(record.label, "big.ben.hm")
+
+    def test_loc_record_field_validation_degLat(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'degLat': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.degLat = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'degLat': ['Ensure this value is less than or equal to 90.']}"
+        ):
+            record.degLat = 91
+            record.clean_fields()
+
+    def test_loc_record_field_validation_degLong(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'degLong': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.degLong = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'degLong': ['Ensure this value is less than or equal to 180.']}"
+        ):
+            record.degLong = 181
+            record.clean_fields()
+
+    def test_loc_record_field_validation_minLat(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'minLat': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.minLat = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'minLat': ['Ensure this value is less than or equal to 59.']}"
+        ):
+            record.minLat = 60
+            record.clean_fields()
+
+    def test_loc_record_field_validation_minLong(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'minLong': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.minLong = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'minLong': ['Ensure this value is less than or equal to 59.']}"
+        ):
+            record.minLong = 60
+            record.clean_fields()
+
+    def test_loc_record_field_validation_secLat(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'secLat': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.secLat = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'secLat': ['Ensure this value is less than or equal to 59.999.']}"
+        ):
+            record.secLat = 60
+            record.clean_fields()
+
+    def test_loc_record_field_validation_secLong(self):  # pylint: disable=C0103
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'secLong': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.secLong = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'secLong': ['Ensure this value is less than or equal to 59.999.']}"
+        ):
+            record.secLong = 60
+            record.clean_fields()
+
+    def test_loc_record_field_validation_altitude(self):
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'altitude': ['Ensure this value is greater than or equal to -100000.']}"
+        ):
+            record.altitude = -100001
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'altitude': ['Ensure this value is less than or equal to 42849672.95.']}"
+        ):
+            record.altitude = 42849672.96
+            record.clean_fields()
+
+    def test_loc_record_field_validation_precision(self):
+        record = LocRecord(
+            label="big.ben.hm",
+            ttl=random_valid_dns_ttl(),
+            degLong=73,
+            minLong=30,
+            secLong=43,
+            dirLong="E",
+            degLat=53,
+            minLat=6,
+            secLat=1,
+            dirLat="S",
+            altitude=517,
+            precision=0,
+        )
+        with self.assertRaisesMessage(
+            ValidationError, "{'precision': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record.precision = -1
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'precision': ['Ensure this value is less than or equal to 90000000.0.']}"
+        ):
+            record.precision = 90000000.01
+            record.clean_fields()
