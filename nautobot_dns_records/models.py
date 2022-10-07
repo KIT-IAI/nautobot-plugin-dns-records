@@ -3,14 +3,14 @@
 import codecs
 
 import nautobot.ipam.models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.utils import extras_features
 
 from nautobot_dns_records.validators import validate_dns_name
-from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS
+from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS, SSHFP_HASH_TYPE, SSHFP_ALGORITHMS
 
 
 class Record(models.Model):
@@ -212,4 +212,40 @@ class PtrRecord(PrimaryModel, Record):
         on_delete=models.CASCADE,
         verbose_name=_("IP Address"),
         help_text=_("Related IP Address for the record."),
+    )
+
+
+@extras_features(
+    "custom_fields",
+    "graphql",
+    "statuses",
+)
+class SshfpRecord(PrimaryModel, Record):
+    """Class that represents a SSHFP Record.
+
+    see RFCs 4255,6594,7479,8709
+
+    Attributes:
+        algorithm (IntegerField)
+        hashType (IntegerField)
+        fingerprint (CharField)
+    """
+
+    algorithm = models.IntegerField(
+        verbose_name=_("fingerprint algorithm"),
+        help_text=_("Algorithm (0: reserved, 1: RSA, 2: DSA, 3: ECDSA, 4: Ed25519, 6:Ed448)"),
+        choices=SSHFP_ALGORITHMS,
+    )
+
+    hashType = models.IntegerField(
+        verbose_name=_("public key hash method"),
+        help_text=_("Algorithm used to hash the public key (0: reserved, 1: SHA-1, 2: SHA-256)"),
+        choices=SSHFP_HASH_TYPE,
+    )
+
+    fingerprint = models.CharField(
+        verbose_name=_("fingerprint"),
+        help_text=_("The ssh fingerprint"),
+        max_length=255,
+        validators=[RegexValidator("^[a-f0-9]*$", "Not a valid fingerprint in hex format")],
     )

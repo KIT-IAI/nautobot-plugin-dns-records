@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
 
-from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord
+from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -346,3 +346,28 @@ class PtrRecordTestCase(TestCase):
     def test_ptr_record_creation_ipv6(self):
         record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
         self.assertEqual(record.address, self.test_ipv6)
+
+
+class SshfpRecordTestCase(TestCase):
+    """Test the SSHFP Record Model."""
+
+    def test_sshfp_record_creation(self):
+        record = SshfpRecord(
+            label=random_valid_dns_name(),
+            ttl=random_valid_dns_ttl(),
+            algorithm=1,
+            hashType=1,
+            fingerprint="81bc1331bcd5b1c605a142d36af7720afd6b38c9",
+        )
+        self.assertEqual(record.fingerprint, "81bc1331bcd5b1c605a142d36af7720afd6b38c9")
+
+    def test_sshfp_record_validation(self):
+        with self.assertRaisesMessage(ValidationError, "{'fingerprint': ['Not a valid fingerprint in hex format']}"):
+            record = SshfpRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                algorithm=1,
+                hashType=1,
+                fingerprint="81bc1331bcd5b1c605a142d36af7720afdx6b38c9",
+            )
+            record.clean_fields()
