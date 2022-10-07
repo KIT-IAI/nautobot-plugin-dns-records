@@ -3,6 +3,7 @@
 import codecs
 
 import nautobot.ipam.models
+import nautobot.dcim.models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -33,6 +34,13 @@ class Record(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(604800)],
         verbose_name=_("TTL"),
         help_text=_("Time to live for the dns entry in seconds, valid values are in the range 1 - 604800."),
+    )
+    device = models.ForeignKey(
+        nautobot.dcim.models.Device,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_("Device")
     )
 
     class Meta:

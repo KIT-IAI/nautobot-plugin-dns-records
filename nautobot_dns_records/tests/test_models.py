@@ -4,6 +4,7 @@ import django.db.models.fields
 from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
 from nautobot.ipam.models import IPAddress
+from nautobot.dcim.models import Device
 
 from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
 from nautobot_dns_records.tests.helpers import (
@@ -19,6 +20,9 @@ class RecordTestCase(AbstractModelMixinTestCase):
     """Test the Record model."""
 
     mixin = Record
+
+    def setUp(self):
+        self.device = Device(name="test-device")
 
     def test_record_is_abstract(self):
         with self.assertRaisesMessage(TypeError, "Abstract models cannot be instantiated."):
@@ -62,6 +66,9 @@ class RecordTestCase(AbstractModelMixinTestCase):
         record.save()
         self.assertEqual(record.__str__(), record.label)
 
+    def test_device_assignment(self):
+        record = self.model(label=random_valid_dns_name(), ttl=1, device=self.device)
+        self.assertEqual(record.device, self.device)
 
 class AddressRecordTestCase(TestCase):
     """Test the AddressRecord Model"""
