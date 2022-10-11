@@ -7,6 +7,7 @@ import nautobot.dcim.models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.utils import extras_features
 
@@ -36,11 +37,7 @@ class Record(models.Model):
         help_text=_("Time to live for the dns entry in seconds, valid values are in the range 1 - 604800."),
     )
     device = models.ForeignKey(
-        nautobot.dcim.models.Device,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("Device")
+        nautobot.dcim.models.Device, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("Device")
     )
 
     class Meta:
@@ -78,6 +75,9 @@ class AddressRecord(PrimaryModel, Record):
         help_text=_("Related IP Address for the record."),
     )
 
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:address_record", kwargs={"pk": self.pk})
+
 
 @extras_features(
     "custom_fields",
@@ -106,6 +106,9 @@ class CNameRecord(PrimaryModel, Record):
         self.target = codecs.encode(self.target, encoding="idna").decode()
         super().save()
 
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:cname_record", kwargs={"pk": self.pk})
+
 
 @extras_features(
     "custom_fields",
@@ -120,6 +123,9 @@ class TxtRecord(PrimaryModel, Record):
     """
 
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
+
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:address_record", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -206,6 +212,9 @@ class LocRecord(PrimaryModel, Record):
         max_digits=10,
     )
 
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:loc_record", kwargs={"pk": self.pk})
+
 
 @extras_features("custom_fields", "graphql", "statuses")
 class PtrRecord(PrimaryModel, Record):
@@ -221,6 +230,9 @@ class PtrRecord(PrimaryModel, Record):
         verbose_name=_("IP Address"),
         help_text=_("Related IP Address for the record."),
     )
+
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:ptr_record", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -257,3 +269,6 @@ class SshfpRecord(PrimaryModel, Record):
         max_length=255,
         validators=[RegexValidator("^[a-f0-9]*$", "Not a valid fingerprint in hex format")],
     )
+
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_dns_records:sshfp_record", kwargs={"pk": self.pk})
