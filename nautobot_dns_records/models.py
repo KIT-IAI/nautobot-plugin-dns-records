@@ -125,7 +125,7 @@ class TxtRecord(PrimaryModel, Record):
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:address_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:txt_record", kwargs={"pk": self.pk})
 
 
 @extras_features(
