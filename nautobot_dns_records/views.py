@@ -38,7 +38,7 @@ class PtrRecordsListView(generic.ObjectListView):
     """List all PTR Records."""
 
     queryset = models.PtrRecord.objects.all()
-    table = tables.GenericRecordTable
+    table = tables.AddressRecordTable
 
 
 class SshfpRecordsListView(generic.ObjectListView):
