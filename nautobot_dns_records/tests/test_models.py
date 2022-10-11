@@ -70,6 +70,7 @@ class RecordTestCase(AbstractModelMixinTestCase):
         record = self.model(label=random_valid_dns_name(), ttl=1, device=self.device)
         self.assertEqual(record.device, self.device)
 
+
 class AddressRecordTestCase(TestCase):
     """Test the AddressRecord Model"""
 
