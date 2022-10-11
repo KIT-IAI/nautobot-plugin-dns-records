@@ -1,23 +1,35 @@
 """Navigation Items to add to Nautobot for nautobot_dns_records."""
 
-from nautobot.extras.plugins import PluginMenuButton, PluginMenuItem
-from nautobot.utilities.choices import ButtonColorChoices
+from nautobot.core.apps import NavMenuTab, NavMenuGroup, NavMenuItem
 
-"""
 menu_items = (
-    PluginMenuItem(
-        link='plugins:nautobot_dns_records:model',  # A reverse compatible link to follow.
-        link_text = 'Sample Text',  # Text to display to user.
-        permissions = [],  # Optional: List of permissions required to display this link.
-        buttons = (  # Optional: Iterable of PluginMenuButton instances to display.
-            PluginMenuButton(
-                'plugins:nautobot_dns_records:model',  # A reverse compatible link to follow.
-                'Sample Text',  # Text to display to user.
-                'mdi mdi-help-circle',  # Button icon CSS Classes (Currently supports Material Design Icons.)
-                ButtonColorChoices.BLUE,  # Optional: Color for the button.,
-                permissions = []  # Optional: List of permissions required to display this button.
-            )
-        )
-    )
+    NavMenuTab(
+        name="IPAM",
+        groups=(
+            NavMenuGroup(
+                name="DNS",
+                weight=800,
+                items=(
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:address_records_list", name="Address Records", permissions=[]
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:txt_records_list", name="TXT Records", permissions=[]
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:loc_records_list", name="LOC Records", permissions=[]
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:cname_records_list", name="CNAME Records", permissions=[]
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:ptr_records_list", name="PTR Records", permissions=[]
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_dns_records:sshfp_records_list", name="SSHFP Records", permissions=[]
+                    ),
+                ),
+            ),
+        ),
+    ),
 )
-"""
