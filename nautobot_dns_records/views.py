@@ -13,6 +13,12 @@ class AddressRecordsListView(generic.ObjectListView):
     table = tables.AddressRecordTable
 
 
+class AddressRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.AddressRecord.objects.all()
+
+
 class TxtRecordsListView(generic.ObjectListView):
     """List all TXT Records."""
 

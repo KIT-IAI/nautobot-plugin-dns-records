@@ -6,6 +6,7 @@ from nautobot_dns_records import views
 
 urlpatterns = [
     path("address_records/", views.AddressRecordsListView.as_view(), name="address_records_list"),
+    path("address_records/<uuid:pk>/", views.AddressRecordView.as_view(), name="address_record"),
     path("txt_records/", views.TxtRecordsListView.as_view(), name="txt_records_list"),
     path("loc_records/", views.LocRecordsListView.as_view(), name="loc_records_list"),
     path("cname_records/", views.CnameRecordsListView.as_view(), name="cname_records_list"),
