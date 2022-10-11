@@ -11,7 +11,7 @@ class AddressRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
     pk = ToggleColumn()
-    label = tables.Column(linkify=False)
+    label = tables.Column(linkify=True)
     address = tables.Column(linkify=True)
 
     class Meta(BaseTable.Meta):
@@ -23,7 +23,7 @@ class GenericRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
     pk = ToggleColumn()
-    label = tables.Column(linkify=False)
+    label = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
 
     class Meta(BaseTable.Meta):

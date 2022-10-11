@@ -2,13 +2,13 @@
 {% load helpers %}
 
 {% block extra_breadcrumbs %}
-  <li><a href="{% url 'plugins:nautobot_dns_records:address_records_list' %}">Address Records</a></li>
+  <li><a href="{% url 'plugins:nautobot_dns_records:txt_records_list' %}">TXT Records</a></li>
 {% endblock extra_breadcrumbs %}
 
 {% block content_left_page %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <strong>Address Record</strong>
+            <strong>TXT Record</strong>
         </div>
         <table class="table table-hover panel-body attr-table">
             <tr>
@@ -16,8 +16,8 @@
               <td>{{ object.label }}</td>
             </tr>
             <tr>
-                <td>IP Addresses</td>
-              <td><a href="{% url 'ipam:ipaddress' object.address.pk %}">{{ object.address }}</a></td>
+                <td>Value</td>
+              <td>{{ object.value }}</a></td>
             </tr>
             <tr>
                 <td>Status</td>

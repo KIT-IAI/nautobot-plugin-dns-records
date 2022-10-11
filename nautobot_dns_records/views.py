@@ -26,6 +26,12 @@ class TxtRecordsListView(generic.ObjectListView):
     table = tables.GenericRecordTable
 
 
+class TxtRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.TxtRecord.objects.all()
+
+
 class LocRecordsListView(generic.ObjectListView):
     """List all LOC Records."""
 
