@@ -39,6 +39,12 @@ class LocRecordsListView(generic.ObjectListView):
     table = tables.GenericRecordTable
 
 
+class LocRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.LocRecord.objects.all()
+
+
 class CnameRecordsListView(generic.ObjectListView):
     """List all CName Records."""
 
