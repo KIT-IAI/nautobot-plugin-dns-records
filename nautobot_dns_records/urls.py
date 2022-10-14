@@ -12,6 +12,7 @@ urlpatterns = [
     path("loc_record/", locrecord.LocRecordsListView.as_view(), name="loc_records_list"),
     path("loc_record/<uuid:pk>/", locrecord.LocRecordView.as_view(), name="loc_record"),
     path("cname_record/", cnamerecord.CnameRecordsListView.as_view(), name="cname_records_list"),
+    path("cname_record/<uuid:pk>/", cnamerecord.CnameRecordView.as_view(), name="cname_record"),
     path("ptr_record/", ptrrecord.PtrRecordsListView.as_view(), name="ptr_records_list"),
     path("sshfp_record/", sshfprecord.SshfpRecordsListView.as_view(), name="sshfp_records_list"),
 ]

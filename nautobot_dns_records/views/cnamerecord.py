@@ -11,3 +11,9 @@ class CnameRecordsListView(generic.ObjectListView):
 
     queryset = models.CNameRecord.objects.all()
     table = tables.GenericRecordTable
+
+
+class CnameRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.CNameRecord.objects.all()
