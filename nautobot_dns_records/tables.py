@@ -2,7 +2,7 @@
 
 import django_tables2 as tables
 from nautobot.extras.tables import StatusTableMixin
-from nautobot.utilities.tables import BaseTable, ToggleColumn
+from nautobot.utilities.tables import BaseTable, ToggleColumn, ButtonsColumn
 
 from nautobot_dns_records import models
 
@@ -13,6 +13,7 @@ class AddressRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     address = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.AddressRecord, buttons=("edit",))
 
     class Meta(BaseTable.Meta):
         model = models.AddressRecord
