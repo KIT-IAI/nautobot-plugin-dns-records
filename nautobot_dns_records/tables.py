@@ -13,7 +13,7 @@ class AddressRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     address = tables.Column(linkify=True)
-    actions = ButtonsColumn(models.AddressRecord, buttons=("edit",))
+    actions = ButtonsColumn(models.AddressRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.AddressRecord

@@ -7,8 +7,9 @@ from nautobot_dns_records.views import addressrecord, txtrecord, locrecord, cnam
 urlpatterns = [
     path("address_record/", addressrecord.AddressRecordsListView.as_view(), name="addressrecord_list"),
     path("address_record/add/", addressrecord.AddressRecordEditView.as_view(), name="addressrecord_add"),
-    path("address_record/<uuid:pk>/edit", addressrecord.AddressRecordEditView.as_view(), name="addressrecord_edit"),
     path("address_record/<uuid:pk>/", addressrecord.AddressRecordView.as_view(), name="addressrecord"),
+    path("address_record/<uuid:pk>/edit/", addressrecord.AddressRecordEditView.as_view(), name="addressrecord_edit"),
+    path("address_record/<uuid:pk>/delete/", addressrecord.AddressRecordDeleteView.as_view(), name="addressrecord_delete"),
     path("txt_record/", txtrecord.TxtRecordsListView.as_view(), name="txtrecord_list"),
     path("txt_record/<uuid:pk>/", txtrecord.TxtRecordView.as_view(), name="txtrecord"),
     path("loc_record/", locrecord.LocRecordsListView.as_view(), name="locrecord_list"),

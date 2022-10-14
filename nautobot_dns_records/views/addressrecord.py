@@ -24,3 +24,9 @@ class AddressRecordEditView(generic.ObjectEditView):
 
     queryset = models.AddressRecord.objects.all()
     model_form = forms.AddressRecordForm
+
+
+class AddressRecordDeleteView(generic.ObjectDeleteView):
+    """Delete an address record"""
+
+    queryset = models.AddressRecord.objects.all()
