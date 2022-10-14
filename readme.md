@@ -14,6 +14,10 @@ The Development Environment is a docker based.
 4. ``invoke build``
 5. ``invoke start``
 
+## Setup
+
+- Allow Statuses
+
 ## License
 
 This code is licensed under the [Apache License 2.0](LICENSE)
