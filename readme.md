@@ -17,8 +17,3 @@ The Development Environment is a docker based.
 ## License
 
 This code is licensed under the [Apache License 2.0](LICENSE)
-
-The following files are copyrighted by Network to Code, LLC ([Source](https://github.com/nautobot/nautobot-plugin-golden-config)):
-* [development/](development)
-* [tasks.py](tasks.py)
-* [pyproject.toml](pyproject.toml)(Parts)
