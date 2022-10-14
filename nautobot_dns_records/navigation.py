@@ -11,22 +11,22 @@ menu_items = (
                 weight=800,
                 items=(
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:address_records_list", name="Address Records", permissions=[]
+                        link="plugins:nautobot_dns_records:addressrecord_list", name="Address Records", permissions=[]
                     ),
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:txt_records_list", name="TXT Records", permissions=[]
+                        link="plugins:nautobot_dns_records:txtrecord_list", name="TXT Records", permissions=[]
                     ),
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:loc_records_list", name="LOC Records", permissions=[]
+                        link="plugins:nautobot_dns_records:locrecord_list", name="LOC Records", permissions=[]
                     ),
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:cname_records_list", name="CNAME Records", permissions=[]
+                        link="plugins:nautobot_dns_records:cnamerecord_list", name="CNAME Records", permissions=[]
                     ),
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:ptr_records_list", name="PTR Records", permissions=[]
+                        link="plugins:nautobot_dns_records:ptrrecord_list", name="PTR Records", permissions=[]
                     ),
                     NavMenuItem(
-                        link="plugins:nautobot_dns_records:sshfp_records_list", name="SSHFP Records", permissions=[]
+                        link="plugins:nautobot_dns_records:sshfprecord_list", name="SSHFP Records", permissions=[]
                     ),
                 ),
             ),

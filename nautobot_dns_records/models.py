@@ -82,7 +82,7 @@ class AddressRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:address_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:addressrecord", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -113,7 +113,7 @@ class CNameRecord(PrimaryModel, Record):
         super().save()
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:cname_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:cnamerecord", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -131,7 +131,7 @@ class TxtRecord(PrimaryModel, Record):
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:txt_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:txtrecord", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -219,7 +219,7 @@ class LocRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:loc_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
 
 @extras_features("custom_fields", "graphql", "statuses")
@@ -238,7 +238,7 @@ class PtrRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:ptr_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
 
 
 @extras_features(
@@ -277,4 +277,4 @@ class SshfpRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_dns_records:sshfp_record", kwargs={"pk": self.pk})
+        return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
