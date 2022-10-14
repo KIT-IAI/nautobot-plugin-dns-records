@@ -1,4 +1,5 @@
 /development/creds.env
+/development/jobs
 /.coverage
 .idea/
 __pycache__
