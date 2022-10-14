@@ -11,3 +11,9 @@ class SshfpRecordsListView(generic.ObjectListView):
 
     queryset = models.SshfpRecord.objects.all()
     table = tables.GenericRecordTable
+
+
+class SshfpRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.SshfpRecord.objects.all()

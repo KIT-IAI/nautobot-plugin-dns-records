@@ -11,3 +11,9 @@ class PtrRecordsListView(generic.ObjectListView):
 
     queryset = models.PtrRecord.objects.all()
     table = tables.AddressRecordTable
+
+
+class PtrRecordView(generic.ObjectView):
+    """Show a Address Record"""
+
+    queryset = models.PtrRecord.objects.all()

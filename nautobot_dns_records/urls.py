@@ -14,5 +14,7 @@ urlpatterns = [
     path("cname_record/", cnamerecord.CnameRecordsListView.as_view(), name="cname_records_list"),
     path("cname_record/<uuid:pk>/", cnamerecord.CnameRecordView.as_view(), name="cname_record"),
     path("ptr_record/", ptrrecord.PtrRecordsListView.as_view(), name="ptr_records_list"),
+    path("ptr_record/<uuid:pk>/", ptrrecord.PtrRecordView.as_view(), name="ptr_record"),
     path("sshfp_record/", sshfprecord.SshfpRecordsListView.as_view(), name="sshfp_records_list"),
+    path("sshfp_record/<uuid:pk>/", sshfprecord.SshfpRecordView.as_view(), name="sshfp_record"),
 ]
