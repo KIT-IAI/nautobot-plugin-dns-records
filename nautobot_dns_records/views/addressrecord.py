@@ -10,6 +10,7 @@ class AddressRecordsListView(generic.ObjectListView):
 
     queryset = models.AddressRecord.objects.all()
     table = tables.AddressRecordTable
+    action_buttons = ("add",)
 
 
 class AddressRecordView(generic.ObjectView):
