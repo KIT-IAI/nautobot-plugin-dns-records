@@ -18,7 +18,10 @@ urlpatterns = [
     path("txt_record/<uuid:pk>/", txtrecord.TxtRecordView.as_view(), name="txtrecord"),
     # LOC Record
     path("loc_record/", locrecord.LocRecordsListView.as_view(), name="locrecord_list"),
+    path("loc_record/add/", locrecord.LocRecordEditView.as_view(), name="locrecord_add"),
     path("loc_record/<uuid:pk>/", locrecord.LocRecordView.as_view(), name="locrecord"),
+    path("loc_record/<uuid:pk>/edit/", locrecord.LocRecordEditView.as_view(), name="locrecord_edit"),
+    path("loc_record/<uuid:pk>/delet/", locrecord.LocRecordDeleteView.as_view(), name="locrecord_delete"),
     # CNAME Record
     path("cname_record/", cnamerecord.CnameRecordsListView.as_view(), name="cnamerecord_list"),
     path("cname_record/add/", cnamerecord.CnameRecordEditView.as_view(), name="cnamerecord_add"),

@@ -22,3 +22,11 @@ class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
     class Meta:
         model = models.CNameRecord
         fields = ["label", "ttl", "target", "status", "tags"]
+
+
+class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """LOC Record create/edit form"""
+
+    class Meta:
+        model = models.LocRecord
+        fields = ["label", "ttl", "degLat", "minLat", "secLat", "degLong", "minLong", "secLong", "precision", "altitude", "status", "tags"]
