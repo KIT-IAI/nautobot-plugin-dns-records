@@ -15,19 +15,19 @@ class SshfpRecordsListView(generic.ObjectListView):
 
 
 class SshfpRecordView(generic.ObjectView):
-    """Show a Address Record"""
+    """Show a SSHFP Record"""
 
     queryset = models.SshfpRecord.objects.all()
 
 
 class SshfpRecordEditView(generic.ObjectEditView):
-    """Edit an LOC record"""
+    """Edit an SSHFP record"""
 
     queryset = models.SshfpRecord.objects.all()
     model_form = forms.SshfpRecordForm
 
 
 class SshfpRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an LOC record"""
+    """Delete an SHFP record"""
 
     queryset = models.SshfpRecord.objects.all()

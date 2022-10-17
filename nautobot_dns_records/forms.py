@@ -29,7 +29,20 @@ class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
 
     class Meta:
         model = models.LocRecord
-        fields = ["label", "ttl", "degLat", "minLat", "secLat", "degLong", "minLong", "secLong", "precision", "altitude", "status", "tags"]
+        fields = [
+            "label",
+            "ttl",
+            "degLat",
+            "minLat",
+            "secLat",
+            "degLong",
+            "minLong",
+            "secLong",
+            "precision",
+            "altitude",
+            "status",
+            "tags",
+        ]
 
 
 class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
