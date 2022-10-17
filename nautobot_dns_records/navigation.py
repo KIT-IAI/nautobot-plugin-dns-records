@@ -13,18 +13,12 @@ menu_items = (
                     NavMenuItem(
                         link="plugins:nautobot_dns_records:addressrecord_list", name="Address Records", permissions=[]
                     ),
-                    NavMenuItem(
-                        link="plugins:nautobot_dns_records:txtrecord_list", name="TXT Records", permissions=[]
-                    ),
-                    NavMenuItem(
-                        link="plugins:nautobot_dns_records:locrecord_list", name="LOC Records", permissions=[]
-                    ),
+                    NavMenuItem(link="plugins:nautobot_dns_records:txtrecord_list", name="TXT Records", permissions=[]),
+                    NavMenuItem(link="plugins:nautobot_dns_records:locrecord_list", name="LOC Records", permissions=[]),
                     NavMenuItem(
                         link="plugins:nautobot_dns_records:cnamerecord_list", name="CNAME Records", permissions=[]
                     ),
-                    NavMenuItem(
-                        link="plugins:nautobot_dns_records:ptrrecord_list", name="PTR Records", permissions=[]
-                    ),
+                    NavMenuItem(link="plugins:nautobot_dns_records:ptrrecord_list", name="PTR Records", permissions=[]),
                     NavMenuItem(
                         link="plugins:nautobot_dns_records:sshfprecord_list", name="SSHFP Records", permissions=[]
                     ),

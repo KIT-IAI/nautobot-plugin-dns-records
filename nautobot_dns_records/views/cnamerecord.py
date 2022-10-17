@@ -2,7 +2,7 @@
 
 from nautobot.core.views import generic
 
-from nautobot_dns_records import models
+from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
 
 
@@ -11,9 +11,23 @@ class CnameRecordsListView(generic.ObjectListView):
 
     queryset = models.CNameRecord.objects.all()
     table = tables.CnameRecordTable
+    action_buttons = ("add",)
 
 
 class CnameRecordView(generic.ObjectView):
     """Show a Address Record"""
+
+    queryset = models.CNameRecord.objects.all()
+
+
+class CnameRecordEditView(generic.ObjectEditView):
+    """Edit an address record"""
+
+    queryset = models.CNameRecord.objects.all()
+    model_form = forms.CnameRecordForm
+
+
+class CnameRecordDeleteView(generic.ObjectDeleteView):
+    """Delete an address record"""
 
     queryset = models.CNameRecord.objects.all()

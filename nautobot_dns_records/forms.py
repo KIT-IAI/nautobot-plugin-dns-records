@@ -14,3 +14,11 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
     class Meta:
         model = models.AddressRecord
         fields = ["label", "ttl", "address", "status", "tags"]
+
+
+class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """CName Record create/edit form"""
+
+    class Meta:
+        model = models.CNameRecord
+        fields = ["label", "ttl", "target", "status", "tags"]
