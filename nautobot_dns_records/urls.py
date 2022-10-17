@@ -15,7 +15,10 @@ urlpatterns = [
     ),
     # TXT Record
     path("txt_record/", txtrecord.TxtRecordsListView.as_view(), name="txtrecord_list"),
+    path("txt_record/add/", txtrecord.TxtRecordEditView.as_view(), name="txtrecord_add"),
     path("txt_record/<uuid:pk>/", txtrecord.TxtRecordView.as_view(), name="txtrecord"),
+    path("txt_record/<uuid:pk>/edit/", txtrecord.TxtRecordEditView.as_view(), name="txtrecord_edit"),
+    path("txt_record/<uuid:pk>/delete/", txtrecord.TxtRecordDeleteView.as_view(), name="txtrecord_delete"),
     # LOC Record
     path("loc_record/", locrecord.LocRecordsListView.as_view(), name="locrecord_list"),
     path("loc_record/add/", locrecord.LocRecordEditView.as_view(), name="locrecord_add"),

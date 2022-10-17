@@ -48,3 +48,11 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
     class Meta:
         model = models.SshfpRecord
         fields = ["label", "ttl", "algorithm", "hashType", "fingerprint", "status", "tags"]
+
+
+class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """TXT Record create/edit form"""
+
+    class Meta:
+        model = models.TxtRecord
+        fields = ["label", "ttl", "value", "status", "tags"]
