@@ -31,6 +31,7 @@ class TxtRecordTable(StatusTableMixin, BaseTable):
         model = models.TxtRecord
         fields = ("pk", "label", "device")
 
+
 class LocRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
@@ -41,6 +42,7 @@ class LocRecordTable(StatusTableMixin, BaseTable):
     class Meta(BaseTable.Meta):
         model = models.LocRecord
         fields = ("pk", "label", "device")
+
 
 class CnameRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
@@ -53,6 +55,7 @@ class CnameRecordTable(StatusTableMixin, BaseTable):
         model = models.CNameRecord
         fields = ("pk", "label", "device")
 
+
 class PtrRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
@@ -63,6 +66,7 @@ class PtrRecordTable(StatusTableMixin, BaseTable):
     class Meta(BaseTable.Meta):
         model = models.PtrRecord
         fields = ("pk", "label", "address")
+
 
 class SshfpRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
