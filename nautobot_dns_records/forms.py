@@ -40,3 +40,11 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
     class Meta:
         model = models.PtrRecord
         fields = ["label", "ttl", "address", "status", "tags"]
+
+
+class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """SSHFP Record create/edit form"""
+
+    class Meta:
+        model = models.SshfpRecord
+        fields = ["label", "ttl", "algorithm", "hashType", "fingerprint", "status", "tags"]

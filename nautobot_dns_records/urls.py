@@ -36,5 +36,8 @@ urlpatterns = [
     path("ptr_record/<uuid:pk>/delete/", ptrrecord.PtrRecordDeleteView.as_view(), name="ptrrecord_delete"),
     # SSHFP Record
     path("sshfp_record/", sshfprecord.SshfpRecordsListView.as_view(), name="sshfprecord_list"),
+    path("sshfp_record/add/", sshfprecord.SshfpRecordEditView.as_view(), name="sshfprecord_add"),
     path("sshfp_record/<uuid:pk>/", sshfprecord.SshfpRecordView.as_view(), name="sshfprecord"),
+    path("sshfp_record/<uuid:pk>/edit/", sshfprecord.SshfpRecordEditView.as_view(), name="sshfprecord_edit"),
+    path("sshfp_record/<uuid:pk>/delete/", sshfprecord.SshfpRecordDeleteView.as_view(), name="sshfprecord_delete"),
 ]
