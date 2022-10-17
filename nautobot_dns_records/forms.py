@@ -30,3 +30,13 @@ class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
     class Meta:
         model = models.LocRecord
         fields = ["label", "ttl", "degLat", "minLat", "secLat", "degLong", "minLong", "secLong", "precision", "altitude", "status", "tags"]
+
+
+class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """PTR Record create/edit form"""
+
+    address = DynamicModelChoiceField(queryset=nautobot.ipam.models.IPAddress.objects.all())
+
+    class Meta:
+        model = models.PtrRecord
+        fields = ["label", "ttl", "address", "status", "tags"]

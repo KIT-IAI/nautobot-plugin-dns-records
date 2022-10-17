@@ -2,7 +2,7 @@
 
 from nautobot.core.views import generic
 
-from nautobot_dns_records import models
+from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
 
 
@@ -11,9 +11,23 @@ class PtrRecordsListView(generic.ObjectListView):
 
     queryset = models.PtrRecord.objects.all()
     table = tables.PtrRecordTable
+    action_buttons = ("add",)
 
 
 class PtrRecordView(generic.ObjectView):
-    """Show a Address Record"""
+    """Show a PTR Record"""
+
+    queryset = models.PtrRecord.objects.all()
+
+
+class PtrRecordEditView(generic.ObjectEditView):
+    """Edit an PTR record"""
+
+    queryset = models.PtrRecord.objects.all()
+    model_form = forms.PtrRecordForm
+
+
+class PtrRecordDeleteView(generic.ObjectDeleteView):
+    """Delete an PTR record"""
 
     queryset = models.PtrRecord.objects.all()
