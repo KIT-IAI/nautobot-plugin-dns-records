@@ -20,7 +20,7 @@ class AddressRecordTable(StatusTableMixin, BaseTable):
         fields = ("pk", "label", "address")
 
 
-class GenericRecordTable(StatusTableMixin, BaseTable):
+class TxtRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
     pk = ToggleColumn()
@@ -28,5 +28,49 @@ class GenericRecordTable(StatusTableMixin, BaseTable):
     device = tables.Column(linkify=True)
 
     class Meta(BaseTable.Meta):
-        model = models.AddressRecord
+        model = models.TxtRecord
+        fields = ("pk", "label", "device")
+
+class LocRecordTable(StatusTableMixin, BaseTable):
+    """Table for all record based models."""
+
+    pk = ToggleColumn()
+    label = tables.Column(linkify=True)
+    device = tables.Column(linkify=True)
+
+    class Meta(BaseTable.Meta):
+        model = models.LocRecord
+        fields = ("pk", "label", "device")
+
+class CnameRecordTable(StatusTableMixin, BaseTable):
+    """Table for all record based models."""
+
+    pk = ToggleColumn()
+    label = tables.Column(linkify=True)
+    device = tables.Column(linkify=True)
+
+    class Meta(BaseTable.Meta):
+        model = models.CNameRecord
+        fields = ("pk", "label", "device")
+
+class PtrRecordTable(StatusTableMixin, BaseTable):
+    """Table for all record based models."""
+
+    pk = ToggleColumn()
+    label = tables.Column(linkify=True)
+    address = tables.Column(linkify=True)
+
+    class Meta(BaseTable.Meta):
+        model = models.PtrRecord
+        fields = ("pk", "label", "address")
+
+class SshfpRecordTable(StatusTableMixin, BaseTable):
+    """Table for all record based models."""
+
+    pk = ToggleColumn()
+    label = tables.Column(linkify=True)
+    device = tables.Column(linkify=True)
+
+    class Meta(BaseTable.Meta):
+        model = models.SshfpRecord
         fields = ("pk", "label", "device")

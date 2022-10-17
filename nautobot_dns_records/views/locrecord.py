@@ -10,7 +10,7 @@ class LocRecordsListView(generic.ObjectListView):
     """List all LOC Records."""
 
     queryset = models.LocRecord.objects.all()
-    table = tables.GenericRecordTable
+    table = tables.LocRecordTable
 
 
 class LocRecordView(generic.ObjectView):

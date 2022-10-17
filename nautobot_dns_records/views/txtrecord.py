@@ -10,7 +10,7 @@ class TxtRecordsListView(generic.ObjectListView):
     """List all TXT Records."""
 
     queryset = models.TxtRecord.objects.all()
-    table = tables.GenericRecordTable
+    table = tables.TxtRecordTable
 
 
 class TxtRecordView(generic.ObjectView):

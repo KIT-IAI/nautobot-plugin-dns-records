@@ -10,7 +10,7 @@ class SshfpRecordsListView(generic.ObjectListView):
     """List all SSHFP Records."""
 
     queryset = models.SshfpRecord.objects.all()
-    table = tables.GenericRecordTable
+    table = tables.SshfpRecordTable
 
 
 class SshfpRecordView(generic.ObjectView):

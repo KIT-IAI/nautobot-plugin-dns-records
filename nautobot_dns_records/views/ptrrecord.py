@@ -10,7 +10,7 @@ class PtrRecordsListView(generic.ObjectListView):
     """List all PTR Records."""
 
     queryset = models.PtrRecord.objects.all()
-    table = tables.AddressRecordTable
+    table = tables.PtrRecordTable
 
 
 class PtrRecordView(generic.ObjectView):
