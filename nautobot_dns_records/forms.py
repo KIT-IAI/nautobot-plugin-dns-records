@@ -11,7 +11,9 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
     """Address Record create/edit form"""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
-    address = DynamicModelChoiceField(queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={'device_id': "$device"})
+    address = DynamicModelChoiceField(
+        queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={"device_id": "$device"}
+    )
 
     class Meta:
         model = models.AddressRecord
@@ -31,6 +33,8 @@ class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """LOC Record create/edit form"""
 
+    device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
+
     class Meta:
         model = models.LocRecord
         fields = [
@@ -44,6 +48,7 @@ class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
             "secLong",
             "precision",
             "altitude",
+            "device",
             "status",
             "tags",
         ]
@@ -53,7 +58,9 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
     """PTR Record create/edit form"""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
-    address = DynamicModelChoiceField(queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={'device_id': "$device"})
+    address = DynamicModelChoiceField(
+        queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={"device_id": "$device"}
+    )
 
     class Meta:
         model = models.PtrRecord
@@ -63,9 +70,11 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
 class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """SSHFP Record create/edit form"""
 
+    device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
+
     class Meta:
         model = models.SshfpRecord
-        fields = ["label", "ttl", "algorithm", "hashType", "fingerprint", "status", "tags"]
+        fields = ["label", "ttl", "algorithm", "hashType", "fingerprint", "device", "status", "tags"]
 
 
 class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
