@@ -69,6 +69,8 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """TXT Record create/edit form"""
 
+    device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
+
     class Meta:
         model = models.TxtRecord
-        fields = ["label", "ttl", "value", "status", "tags"]
+        fields = ["label", "ttl", "value", "device", "status", "tags"]
