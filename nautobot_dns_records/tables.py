@@ -29,7 +29,7 @@ class TxtRecordTable(StatusTableMixin, BaseTable):
 
     class Meta(BaseTable.Meta):
         model = models.TxtRecord
-        fields = ("pk", "label", "device")
+        fields = ("pk", "label", "device", "value")
 
 
 class LocRecordTable(StatusTableMixin, BaseTable):
