@@ -2,7 +2,15 @@
 
 from django.urls import path
 
-from nautobot_dns_records.views import addressrecord, txtrecord, locrecord, cnamerecord, ptrrecord, sshfprecord
+from nautobot_dns_records.views import (
+    addressrecord,
+    txtrecord,
+    locrecord,
+    cnamerecord,
+    ptrrecord,
+    sshfprecord,
+    device_tab,
+)
 
 urlpatterns = [
     # Address Record
@@ -43,4 +51,6 @@ urlpatterns = [
     path("sshfp_record/<uuid:pk>/", sshfprecord.SshfpRecordView.as_view(), name="sshfprecord"),
     path("sshfp_record/<uuid:pk>/edit/", sshfprecord.SshfpRecordEditView.as_view(), name="sshfprecord_edit"),
     path("sshfp_record/<uuid:pk>/delete/", sshfprecord.SshfpRecordDeleteView.as_view(), name="sshfprecord_delete"),
+    # Custom Tabs
+    path("devices/<uuid:pk>/records/", device_tab.DeviceRecordsTab.as_view(), name="device_records"),
 ]
