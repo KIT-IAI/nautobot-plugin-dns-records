@@ -21,9 +21,11 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
 class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """CName Record create/edit form"""
 
+    device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
+
     class Meta:
         model = models.CNameRecord
-        fields = ["label", "ttl", "target", "status", "tags"]
+        fields = ["label", "ttl", "target", "device", "status", "tags"]
 
 
 class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
