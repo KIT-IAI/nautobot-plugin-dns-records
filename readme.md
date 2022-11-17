@@ -19,5 +19,7 @@ TBD
 This code is licensed under the [Apache License 2.0](LICENSE)
 
 Copyright 2022, Copyright Owner: Karlsruhe Institute of Technology (KIT)
+
 Author: Daniel Bacher
+
 Contact: daniel.bacher@kit.edu, Institute of Software Development
