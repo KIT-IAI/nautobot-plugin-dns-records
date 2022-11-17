@@ -26,6 +26,7 @@ class TxtRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.TxtRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.TxtRecord
@@ -38,6 +39,7 @@ class LocRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.LocRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.LocRecord
@@ -50,6 +52,7 @@ class CnameRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.CNameRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.CNameRecord
@@ -62,6 +65,7 @@ class PtrRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     address = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.PtrRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.PtrRecord
@@ -74,6 +78,7 @@ class SshfpRecordTable(StatusTableMixin, BaseTable):
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
+    actions = ButtonsColumn(models.SshfpRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.SshfpRecord
