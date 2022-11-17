@@ -43,7 +43,6 @@ class Record(models.Model):
     status = StatusField(
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
-        default=Status.objects.get(slug="active").pk,
     )
 
     class Meta:
