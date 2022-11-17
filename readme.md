@@ -8,15 +8,11 @@ This plugin allows to manage DNS records in Nautobot
 The Development Environment is a docker based.
 
 **Setup:**
-1. ``poetry install --all-extras``
-2. ``poetry shell``
-3. copy [creds.example.env](development/creds.example.env) to ``development/creds.env`` and update the passwords
-4. ``invoke build``
-5. ``invoke start``
+TBD
 
 ## Setup
 
-- Allow Statuses
+- Allow Statuses for models
 
 ## License
 
