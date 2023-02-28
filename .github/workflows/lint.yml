@@ -51,4 +51,4 @@ jobs:
       - name: Run pylint
         run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
       - name: Run pydocstyle
-        run: pydocstyle nautobot_dns_records
+        run: poetry run pydocstyle nautobot_dns_records
