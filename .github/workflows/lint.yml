@@ -25,6 +25,8 @@ jobs:
         run: poetry install
       - name: Run black (check mode)
         run: poetry run black --check nautobot_dns_records
+      - name: List directory
+        run: ls -la
       - name: Run pylint
         run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
       - name: Run pydocstyle
