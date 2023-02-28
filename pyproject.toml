@@ -82,6 +82,9 @@ notes = """,
     XXX,
     """
 
+[tool.pylint.design]
+max-parents = 10
+
 [tool.pydocstyle]
 convention = "google"
 inherit = false

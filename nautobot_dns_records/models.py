@@ -9,7 +9,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from nautobot.core.models.generics import PrimaryModel
-from nautobot.extras.models import StatusField, Status
+from nautobot.extras.models import StatusField
 from nautobot.extras.utils import extras_features
 
 from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS, SSHFP_HASH_TYPE, SSHFP_ALGORITHMS

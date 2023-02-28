@@ -15,10 +15,11 @@ from nautobot_dns_records.tables import (
 
 class DeviceRecordsTab(generic.ObjectView):
     """Display all dns records for a device."""
+
     queryset = Device.objects.all()
     template_name = "nautobot_dns_records/tab_device_records.html"
 
-    def get_extra_context(self, request, instance):
+    def get_extra_context(self, request, instance):  # pylint: disable-msg=too-many-locals
         """Returns all dns records related to a device."""
         addressrecords = AddressRecord.objects.filter(address__interface__device=instance).all()
         addressrecords_table = AddressRecordTable(data=addressrecords, user=request.user, orderable=False)
@@ -45,4 +46,9 @@ class DeviceRecordsTab(generic.ObjectView):
             "locrecords_table": locrecords_table,
             "sshfprecords_table": sshfprecords_table,
         }
-        return {**extra_context, **super(DeviceRecordsTab, self).get_extra_context(request, instance)}
+        return {
+            **extra_context,
+            **super(DeviceRecordsTab, self).get_extra_context(
+                request, instance
+            ),  # pylint: disable-msg=super-with-arguments
+        }
