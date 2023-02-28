@@ -10,6 +10,7 @@ jobs:
   PythonLinting:
     name: Python linting
     runs-on: ubuntu-latest
+    env: NAUTOBOT_CONFIG=//home/runner/.nautobot/nautobot-plugin-dns-records/development/nautobot_config.py
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v4
@@ -22,7 +23,7 @@ jobs:
       - name: Install all dependencies
         run: poetry install
       - name: Run black (check mode)
-        run: poetry run black nautobot_dns_records
+        run: poetry run black --check nautobot_dns_records
       - name: Run pylint
         run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
       - name: Run pydocstyle
