@@ -29,6 +29,7 @@ nautobot = "~1.5"
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
 factory-boy = "^3.2.1"
+pydocstyle = "^6.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
