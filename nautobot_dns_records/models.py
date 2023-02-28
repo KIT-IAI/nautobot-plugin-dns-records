@@ -67,7 +67,7 @@ class Record(models.Model):
     "statuses",
 )
 class AddressRecord(PrimaryModel, Record):
-    """Class that represents A and AAAA record
+    """Class that represents A and AAAA record.
 
     Attributes:
         address (nautobot.ipam.models.IPAddress)
@@ -81,6 +81,7 @@ class AddressRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
+        """Returns the absolute url to the addressRecord."""
         return reverse("plugins:nautobot_dns_records:addressrecord", kwargs={"pk": self.pk})
 
 
@@ -90,7 +91,7 @@ class AddressRecord(PrimaryModel, Record):
     "statuses",
 )
 class CNameRecord(PrimaryModel, Record):
-    """Class that represents a CNAME record
+    """Class that represents a CNAME record.
 
     Attributes:
         target (CharField)
@@ -112,6 +113,7 @@ class CNameRecord(PrimaryModel, Record):
         super().save()
 
     def get_absolute_url(self):
+        """Returns the absolute url to the cnameRecord."""
         return reverse("plugins:nautobot_dns_records:cnamerecord", kwargs={"pk": self.pk})
 
 
@@ -121,7 +123,7 @@ class CNameRecord(PrimaryModel, Record):
     "statuses",
 )
 class TxtRecord(PrimaryModel, Record):
-    """Class that represents a TXT record
+    """Class that represents a TXT record.
 
     Attributes:
         value (CharField)
@@ -130,6 +132,7 @@ class TxtRecord(PrimaryModel, Record):
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
 
     def get_absolute_url(self):
+        """Returns the absolute url to the txtRecord."""
         return reverse("plugins:nautobot_dns_records:txtrecord", kwargs={"pk": self.pk})
 
 
@@ -218,12 +221,13 @@ class LocRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
+        """Returns the absolute url to the locRecord."""
         return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
 
 @extras_features("custom_fields", "graphql", "statuses")
 class PtrRecord(PrimaryModel, Record):
-    """Class that represents a PTR record
+    """Class that represents a PTR record.
 
     Attributes:
         address (nautobot.ipam.models.IPAddress)
@@ -237,6 +241,7 @@ class PtrRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
+        """Returns the absolute url to the ptrRecord."""
         return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
 
 
@@ -276,4 +281,5 @@ class SshfpRecord(PrimaryModel, Record):
     )
 
     def get_absolute_url(self):
+        """Returns the absolute url to the sshfpRecord."""
         return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})

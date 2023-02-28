@@ -1,3 +1,4 @@
+"""Add a tab to the device object view."""
 from nautobot.core.views import generic
 from nautobot.dcim.models import Device
 
@@ -13,10 +14,12 @@ from nautobot_dns_records.tables import (
 
 
 class DeviceRecordsTab(generic.ObjectView):
+    """Display all dns records for a device."""
     queryset = Device.objects.all()
     template_name = "nautobot_dns_records/tab_device_records.html"
 
     def get_extra_context(self, request, instance):
+        """Returns all dns records related to a device."""
         addressrecords = AddressRecord.objects.filter(address__interface__device=instance).all()
         addressrecords_table = AddressRecordTable(data=addressrecords, user=request.user, orderable=False)
         ptrrecords = PtrRecord.objects.filter(address__interface__device=instance).all()

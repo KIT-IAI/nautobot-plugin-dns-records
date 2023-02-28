@@ -1,4 +1,4 @@
-"""Views for the cname record model"""
+"""Views for the cname record model."""
 
 from nautobot.core.views import generic
 
@@ -15,19 +15,19 @@ class CnameRecordsListView(generic.ObjectListView):
 
 
 class CnameRecordView(generic.ObjectView):
-    """Show a Address Record"""
+    """Show a Address Record."""
 
     queryset = models.CNameRecord.objects.all()
 
 
 class CnameRecordEditView(generic.ObjectEditView):
-    """Edit an address record"""
+    """Edit an address record."""
 
     queryset = models.CNameRecord.objects.all()
     model_form = forms.CnameRecordForm
 
 
 class CnameRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an address record"""
+    """Delete an address record."""
 
     queryset = models.CNameRecord.objects.all()

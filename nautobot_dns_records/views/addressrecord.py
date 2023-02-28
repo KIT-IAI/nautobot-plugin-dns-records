@@ -1,4 +1,4 @@
-"""Views for the address record model"""
+"""Views for the address record model."""
 
 from nautobot.core.views import generic
 
@@ -14,19 +14,19 @@ class AddressRecordsListView(generic.ObjectListView):
 
 
 class AddressRecordView(generic.ObjectView):
-    """Show a Address Record"""
+    """Show a Address Record."""
 
     queryset = models.AddressRecord.objects.all()
 
 
 class AddressRecordEditView(generic.ObjectEditView):
-    """Edit an address record"""
+    """Edit an address record."""
 
     queryset = models.AddressRecord.objects.all()
     model_form = forms.AddressRecordForm
 
 
 class AddressRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an address record"""
+    """Delete an address record."""
 
     queryset = models.AddressRecord.objects.all()

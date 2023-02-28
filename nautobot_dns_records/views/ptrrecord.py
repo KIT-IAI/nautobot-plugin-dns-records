@@ -1,4 +1,4 @@
-"""Views for the ptr record model"""
+"""Views for the ptr record model."""
 
 from nautobot.core.views import generic
 
@@ -15,19 +15,19 @@ class PtrRecordsListView(generic.ObjectListView):
 
 
 class PtrRecordView(generic.ObjectView):
-    """Show a PTR Record"""
+    """Show a PTR Record."""
 
     queryset = models.PtrRecord.objects.all()
 
 
 class PtrRecordEditView(generic.ObjectEditView):
-    """Edit an PTR record"""
+    """Edit an PTR record."""
 
     queryset = models.PtrRecord.objects.all()
     model_form = forms.PtrRecordForm
 
 
 class PtrRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an PTR record"""
+    """Delete an PTR record."""
 
     queryset = models.PtrRecord.objects.all()

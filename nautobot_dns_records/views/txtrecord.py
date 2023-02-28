@@ -1,4 +1,4 @@
-"""Views for the loc record model"""
+"""Views for the loc record model."""
 
 from nautobot.core.views import generic
 
@@ -15,19 +15,19 @@ class TxtRecordsListView(generic.ObjectListView):
 
 
 class TxtRecordView(generic.ObjectView):
-    """Show a TXT Record"""
+    """Show a TXT Record."""
 
     queryset = models.TxtRecord.objects.all()
 
 
 class TxtRecordEditView(generic.ObjectEditView):
-    """Edit an TXT record"""
+    """Edit an TXT record."""
 
     queryset = models.TxtRecord.objects.all()
     model_form = forms.TxtRecordForm
 
 
 class TxtRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an TXT record"""
+    """Delete an TXT record."""
 
     queryset = models.TxtRecord.objects.all()

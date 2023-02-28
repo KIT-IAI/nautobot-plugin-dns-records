@@ -1,11 +1,14 @@
+"""Modifies build in nautobot templates."""
 from django.urls import reverse
 from nautobot.extras.plugins import PluginTemplateExtension
 
 
 class DeviceExtraTabs(PluginTemplateExtension):
+    """Add extra device tabs."""
     model = "dcim.device"
 
     def detail_tabs(self):
+        """Add tabs to the device detail view."""
         return [
             {
                 "title": "DNS Records",

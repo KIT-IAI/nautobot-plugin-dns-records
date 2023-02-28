@@ -15,19 +15,19 @@ class LocRecordsListView(generic.ObjectListView):
 
 
 class LocRecordView(generic.ObjectView):
-    """Show a LOC Record"""
+    """Show a LOC Record."""
 
     queryset = models.LocRecord.objects.all()
 
 
 class LocRecordEditView(generic.ObjectEditView):
-    """Edit an LOC record"""
+    """Edit an LOC record."""
 
     queryset = models.LocRecord.objects.all()
     model_form = forms.LocRecordForm
 
 
 class LocRecordDeleteView(generic.ObjectDeleteView):
-    """Delete an LOC record"""
+    """Delete an LOC record."""
 
     queryset = models.LocRecord.objects.all()

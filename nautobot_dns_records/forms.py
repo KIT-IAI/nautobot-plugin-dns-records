@@ -1,3 +1,4 @@
+"""Forms for the nautobot dns records plugin."""
 import nautobot.ipam.models
 import nautobot.dcim.models
 from django import forms
@@ -8,7 +9,7 @@ from nautobot_dns_records import models
 
 
 class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """Address Record create/edit form"""
+    """Address Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
     address = DynamicModelChoiceField(
@@ -21,7 +22,7 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
 
 
 class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """CName Record create/edit form"""
+    """CName Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
 
@@ -31,7 +32,7 @@ class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 
 
 class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """LOC Record create/edit form"""
+    """LOC Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
 
@@ -55,7 +56,7 @@ class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
 
 
 class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """PTR Record create/edit form"""
+    """PTR Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
     address = DynamicModelChoiceField(
@@ -68,7 +69,7 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
 
 
 class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """SSHFP Record create/edit form"""
+    """SSHFP Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
 
@@ -78,7 +79,7 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 
 
 class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
-    """TXT Record create/edit form"""
+    """TXT Record create/edit form."""
 
     device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
 
