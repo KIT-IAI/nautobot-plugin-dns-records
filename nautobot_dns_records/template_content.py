@@ -19,19 +19,19 @@ class DeviceExtraTabs(PluginTemplateExtension):
 
     def buttons(self):
         """Add additional buttons to the device detail view."""
-        return []
+        return ""
 
     def full_width_page(self):
         """Add additional full width content to the device detail view."""
-        return []
+        return ""
 
     def left_page(self):
         """Add additional content to the left page of the device detail view."""
-        return []
+        return ""
 
     def right_page(self):
         """Add additional content to the left page of the device detail view."""
-        return []
+        return ""
 
 
 template_extensions = [
