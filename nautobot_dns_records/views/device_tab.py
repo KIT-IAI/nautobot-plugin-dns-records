@@ -48,7 +48,7 @@ class DeviceRecordsTab(generic.ObjectView):
         }
         return {
             **extra_context,
-            **super(DeviceRecordsTab, self).get_extra_context(
+            **super().get_extra_context(
                 request, instance
-            ),  # pylint: disable-msg=super-with-arguments
+            ),
         }
