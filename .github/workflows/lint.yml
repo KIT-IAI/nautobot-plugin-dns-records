@@ -1,0 +1,29 @@
+name: Lint the projects files
+on:
+  - push
+  - pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  PythonLinting:
+    name: Python linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.7
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.3.2
+      - name: Install all dependencies
+        run: poetry install
+      - name: Run black (check mode)
+        run: poetry run black nautobot_dns_records
+      - name: Run pylint
+        run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
+      - name: Run pydocstyle
+        run: pydocstyle nautobot_dns_records
