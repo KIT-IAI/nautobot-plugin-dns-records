@@ -48,7 +48,5 @@ class DeviceRecordsTab(generic.ObjectView):
         }
         return {
             **extra_context,
-            **super().get_extra_context(
-                request, instance
-            ),
+            **super().get_extra_context(request, instance),
         }
