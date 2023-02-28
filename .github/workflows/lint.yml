@@ -10,7 +10,8 @@ jobs:
   PythonLinting:
     name: Python linting
     runs-on: ubuntu-latest
-    env: NAUTOBOT_CONFIG=//home/runner/.nautobot/nautobot-plugin-dns-records/development/nautobot_config.py
+    env:
+      NAUTOBOT_CONFIG: "/home/runner/.nautobot/nautobot-plugin-dns-records/development/nautobot_config.py"
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v4
