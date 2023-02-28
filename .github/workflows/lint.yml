@@ -10,6 +10,29 @@ jobs:
   PythonLinting:
     name: Python linting
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: nautobot
+          POSTGRES_DB: nautobot
+          POSTGRES_PASSWORD: nautobot
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
     env:
       NAUTOBOT_CONFIG: "/home/runner/work/nautobot-plugin-dns-records/nautobot-plugin-dns-records/development/nautobot_config.py"
     steps:
