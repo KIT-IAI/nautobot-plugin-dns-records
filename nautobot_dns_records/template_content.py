@@ -3,7 +3,6 @@ from nautobot.extras.plugins import PluginTemplateExtension
 
 
 class DeviceExtraTabs(PluginTemplateExtension):
-
     model = "dcim.device"
 
     def detail_tabs(self):

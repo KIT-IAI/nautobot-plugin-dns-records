@@ -28,7 +28,11 @@ class DeviceRecordsTab(generic.ObjectView):
         locrecords = LocRecord.objects.filter(device=instance).all()
         locrecords_table = LocRecordTable(data=locrecords, user=request.user, orderable=False)
         sshfprecords = SshfpRecord.objects.filter(device=instance).all()
-        sshfprecords_table = SshfpRecordTable(data=sshfprecords, user=request.user, orderable=False, )
+        sshfprecords_table = SshfpRecordTable(
+            data=sshfprecords,
+            user=request.user,
+            orderable=False,
+        )
 
         extra_context = {
             "addressrecords_table": addressrecords_table,
