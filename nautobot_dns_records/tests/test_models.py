@@ -1,12 +1,11 @@
 """Tests for the nautobot_dns_records models."""
 
-from nautobot.extras.models import Status
-
 import django.db.models.fields
 from django.core.exceptions import ValidationError
-from nautobot.utilities.testing import TestCase
-from nautobot.ipam.models import IPAddress
 from nautobot.dcim.models import Device
+from nautobot.extras.models import Status
+from nautobot.ipam.models import IPAddress
+from nautobot.utilities.testing import TestCase
 
 from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
 from nautobot_dns_records.tests.helpers import (
