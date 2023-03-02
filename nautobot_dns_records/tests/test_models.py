@@ -1,5 +1,7 @@
 """Tests for the nautobot_dns_records models."""
 
+from nautobot.extras.models import Status
+
 import django.db.models.fields
 from django.core.exceptions import ValidationError
 from nautobot.utilities.testing import TestCase
@@ -113,6 +115,9 @@ class TxtRecordTestCase(TestCase):
 class LocRecordTestCase(TestCase):
     """Test the LocRecord Model"""
 
+    def setUp(self):
+        self.status = Status.objects.get(slug='active')
+
     def test_loc_record_creation(self):
         record = LocRecord(
             label="big.ben.hm",
@@ -127,6 +132,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         record.save()
         self.assertEqual(record.label, "big.ben.hm")
@@ -145,6 +151,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'degLat': ['Ensure this value is greater than or equal to 0.']}"
@@ -171,6 +178,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'degLong': ['Ensure this value is greater than or equal to 0.']}"
@@ -197,6 +205,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'minLat': ['Ensure this value is greater than or equal to 0.']}"
@@ -223,6 +232,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'minLong': ['Ensure this value is greater than or equal to 0.']}"
@@ -249,6 +259,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'secLat': ['Ensure this value is greater than or equal to 0.']}"
@@ -275,6 +286,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'secLong': ['Ensure this value is greater than or equal to 0.']}"
@@ -301,6 +313,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'altitude': ['Ensure this value is greater than or equal to -100000.']}"
@@ -327,6 +340,7 @@ class LocRecordTestCase(TestCase):
             dirLat="S",
             altitude=517,
             precision=0,
+            status=self.status
         )
         with self.assertRaisesMessage(
             ValidationError, "{'precision': ['Ensure this value is greater than or equal to 0.']}"
@@ -359,6 +373,9 @@ class PtrRecordTestCase(TestCase):
 class SshfpRecordTestCase(TestCase):
     """Test the SSHFP Record Model."""
 
+    def setUp(self):
+        self.status = Status.objects.get(slug='active')
+
     def test_sshfp_record_creation(self):
         record = SshfpRecord(
             label=random_valid_dns_name(),
@@ -366,6 +383,7 @@ class SshfpRecordTestCase(TestCase):
             algorithm=1,
             hashType=1,
             fingerprint="81bc1331bcd5b1c605a142d36af7720afd6b38c9",
+            status=self.status
         )
         self.assertEqual(record.fingerprint, "81bc1331bcd5b1c605a142d36af7720afd6b38c9")
 
@@ -377,5 +395,6 @@ class SshfpRecordTestCase(TestCase):
                 algorithm=1,
                 hashType=1,
                 fingerprint="81bc1331bcd5b1c605a142d36af7720afdx6b38c9",
+                status=self.status
             )
             record.clean_fields()
