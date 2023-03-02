@@ -53,6 +53,6 @@ jobs:
       - name: Run pydocstyle
         run: poetry run pydocstyle nautobot_dns_records
       - name: Run the tests with coverage
-        run: coverage run development/manage.py -c development/nautobot_config.py test
+        run: poetry run coverage run development/manage.py -c development/nautobot_config.py test
       - name: Report coverage
-        run: coverage report
+        run: poetry run coverage report
