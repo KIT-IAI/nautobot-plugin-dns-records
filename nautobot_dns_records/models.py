@@ -40,10 +40,6 @@ class Record(models.Model):
     device = models.ForeignKey(
         nautobot.dcim.models.Device, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("Device")
     )
-    status = StatusField(
-        on_delete=models.PROTECT,
-        related_name="%(app_label)s_%(class)s_related",
-    )
 
     class Meta:
         abstract = True
@@ -80,6 +76,11 @@ class AddressRecord(PrimaryModel, Record):
         help_text=_("Related IP Address for the record."),
     )
 
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
+    )
+
     def get_absolute_url(self):
         """Returns the absolute url to the addressRecord."""
         return reverse("plugins:nautobot_dns_records:addressrecord", kwargs={"pk": self.pk})
@@ -102,6 +103,11 @@ class CNameRecord(PrimaryModel, Record):
         validators=[validate_dns_name],
         verbose_name=_("DNS Alias Target"),
         help_text=_("The target of the CNAME Record"),
+    )
+
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
     )
 
     def save(self, *args, **kwargs):
@@ -130,6 +136,10 @@ class TxtRecord(PrimaryModel, Record):
     """
 
     value = models.CharField(max_length=255, verbose_name=_("Value"), help_text=_("The value of the TXT Record"))
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
+    )
 
     def get_absolute_url(self):
         """Returns the absolute url to the txtRecord."""
@@ -219,6 +229,10 @@ class LocRecord(PrimaryModel, Record):
         decimal_places=2,
         max_digits=10,
     )
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
+    )
 
     def get_absolute_url(self):
         """Returns the absolute url to the locRecord."""
@@ -238,6 +252,10 @@ class PtrRecord(PrimaryModel, Record):
         on_delete=models.CASCADE,
         verbose_name=_("IP Address"),
         help_text=_("Related IP Address for the record."),
+    )
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
     )
 
     def get_absolute_url(self):
@@ -278,6 +296,10 @@ class SshfpRecord(PrimaryModel, Record):
         help_text=_("The ssh fingerprint"),
         max_length=255,
         validators=[RegexValidator("^[a-f0-9]*$", "Not a valid fingerprint in hex format")],
+    )
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
     )
 
     def get_absolute_url(self):
