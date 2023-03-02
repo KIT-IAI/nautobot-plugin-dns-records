@@ -52,3 +52,7 @@ jobs:
         run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
       - name: Run pydocstyle
         run: poetry run pydocstyle nautobot_dns_records
+      - name: Run the tests with coverage
+        run: coverage run development/manage.py -c development/nautobot_config.py test
+      - name: Report coverage
+        run: coverage report

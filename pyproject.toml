@@ -30,6 +30,8 @@ nautobot = "~1.5"
 python-dotenv = "^0.21.0"
 factory-boy = "^3.2.1"
 pydocstyle = "^6.3.0"
+coverage = {extras = ["toml"], version = "^7.2.1"}
+django-slowtests = "^1.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -104,3 +106,12 @@ testpaths = [
     "tests"
 ]
 addopts = "-vv --doctest-modules"
+
+[tool.coverage.run]
+include = [
+  "nautobot_dns_records/*",
+  ]
+omit = [
+  "nautobot_dns_records/migrations/*",
+  "nautobot_dns_records/tests/*",
+]
