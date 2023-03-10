@@ -17,6 +17,7 @@ from nautobot_dns_records.tests.helpers import (
 from nautobot_dns_records.tests.mixins import AbstractModelMixinTestCase
 from django.contrib.contenttypes.models import ContentType
 
+
 class RecordTestCase(AbstractModelMixinTestCase):
     """Test the Record model."""
 
