@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ("extras", "0054_scheduledjob_kwargs_request_user_change"),
         ("dcim", "0019_device_redundancy_group_data_migration"),
-        ("nautobot_dns_records", "0002_status"),
+        ("nautobot_dns_records", "0001_initial"),
     ]
 
     operations = [
