@@ -15,7 +15,7 @@ from nautobot_dns_records.tests.helpers import (
     random_ipv6_address,
 )
 from nautobot_dns_records.tests.mixins import AbstractModelMixinTestCase
-
+from django.contrib.contenttypes.models import ContentType
 
 class RecordTestCase(AbstractModelMixinTestCase):
     """Test the Record model."""
@@ -116,6 +116,7 @@ class LocRecordTestCase(TestCase):
 
     def setUp(self):
         self.status = Status.objects.get(slug="active")
+        self.status.content_types.add(ContentType.objects.get_for_model(LocRecord))
 
     def test_loc_record_creation(self):
         record = LocRecord(
@@ -374,6 +375,7 @@ class SshfpRecordTestCase(TestCase):
 
     def setUp(self):
         self.status = Status.objects.get(slug="active")
+        self.status.content_types.add(ContentType.objects.get_for_model(SshfpRecord))
 
     def test_sshfp_record_creation(self):
         record = SshfpRecord(

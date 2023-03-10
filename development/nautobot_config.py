@@ -106,12 +106,6 @@ ALLOWED_URL_SCHEMES = (
     "xmpp",
 )
 
-# Cache timeout in seconds. Cannot be 0. Defaults to 900 (15 minutes). To disable caching, set CACHEOPS_ENABLED to False
-CACHEOPS_DEFAULTS = {"timeout": int(os.getenv("NAUTOBOT_CACHEOPS_TIMEOUT", "900"))}
-
-# Set to False to disable caching with cacheops. (Default: True)
-CACHEOPS_ENABLED = is_truthy(os.getenv("NAUTOBOT_CACHEOPS_ENABLED", "True"))
-
 # If True, all origins will be allowed. Other settings restricting allowed origins will be ignored.
 # Defaults to False. Setting this to True can be dangerous, as it allows any website to make
 # cross-origin requests to yours. Generally you'll want to restrict the list of allowed origins with
@@ -254,3 +248,5 @@ if DEBUG and "debug_toolbar" not in INSTALLED_APPS:  # noqa: F405
     INSTALLED_APPS.append("debug_toolbar")  # noqa: F405
 if DEBUG and "debug_toolbar.middleware.DebugToolbarMiddleware" not in MIDDLEWARE:  # noqa: F405
     MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")  # noqa: F405
+
+TEST_USE_FACTORIES = True
