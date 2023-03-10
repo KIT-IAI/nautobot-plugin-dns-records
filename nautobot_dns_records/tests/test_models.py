@@ -1,6 +1,7 @@
 """Tests for the nautobot_dns_records models."""
 
 import django.db.models.fields
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from nautobot.dcim.models import Device
 from nautobot.extras.models import Status
@@ -15,7 +16,6 @@ from nautobot_dns_records.tests.helpers import (
     random_ipv6_address,
 )
 from nautobot_dns_records.tests.mixins import AbstractModelMixinTestCase
-from django.contrib.contenttypes.models import ContentType
 
 
 class RecordTestCase(AbstractModelMixinTestCase):
