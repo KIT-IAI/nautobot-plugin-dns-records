@@ -86,3 +86,13 @@ class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
     class Meta:
         model = models.TxtRecord
         fields = ["label", "ttl", "value", "device", "status", "tags"]
+
+
+class SrvRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
+    """SRV Record create/edit form."""
+
+    device = DynamicModelChoiceField(queryset=nautobot.dcim.models.Device.objects.all(), required=False)
+
+    class Meta:
+        model = models.SrvRecord
+        fields = ["label", "ttl", "device", "priority", "weight", "port", "target", "status", "tags"]

@@ -83,3 +83,20 @@ class SshfpRecordTable(StatusTableMixin, BaseTable):
     class Meta(BaseTable.Meta):
         model = models.SshfpRecord
         fields = ("pk", "label", "device")
+
+
+class SrvRecordTable(StatusTableMixin, BaseTable):
+    """Table for srv record models."""
+
+    pk = ToggleColumn()
+    label = tables.Column(linkify=True)
+    device = tables.Column(linkify=True)
+    priority = tables.Column()
+    weight = tables.Column()
+    port = tables.Column()
+    target = tables.Column()
+    actions = ButtonsColumn(models.SrvRecord, buttons=("edit", "delete"))
+
+    class Meta(BaseTable.Meta):
+        model = models.SrvRecord
+        fields = ("pk", "label", "device", "priority", "weight", "port", "target")

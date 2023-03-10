@@ -22,6 +22,7 @@ menu_items = (
                     NavMenuItem(
                         link="plugins:nautobot_dns_records:sshfprecord_list", name="SSHFP Records", permissions=[]
                     ),
+                    NavMenuItem(link="plugins:nautobot_dns_records:srvrecord_list", name="SRV Records", permissions=[]),
                 ),
             ),
         ),
