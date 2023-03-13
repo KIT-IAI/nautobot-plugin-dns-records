@@ -305,3 +305,48 @@ class SshfpRecord(PrimaryModel, Record):
     def get_absolute_url(self):
         """Returns the absolute url to the sshfpRecord."""
         return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
+
+
+@extras_features("custom_fields", "graphql", "statuses")
+class SrvRecord(PrimaryModel, Record):
+    """Class that represents a SRV record.
+
+    Attributes:
+        priority (IntegerField)
+        weight (IntegerField)
+        port (IntegerField)
+        target (CharField)
+    """
+
+    priority = models.IntegerField(
+        verbose_name=_("Priority"),
+        help_text=_("Priority of the record"),
+        validators=[MinValueValidator(0), MaxValueValidator(65535)],
+    )
+    weight = models.IntegerField(
+        verbose_name=_("Weight"),
+        help_text=_("Relative weight for entries with the same priority"),
+        validators=[MinValueValidator(0), MaxValueValidator(65535)],
+        default=0,
+    )
+    port = models.IntegerField(
+        verbose_name=_("Port"),
+        help_text=_("TCP or UDP port of the service"),
+        validators=[MinValueValidator(0), MaxValueValidator(65535)],
+    )
+    target = models.CharField(
+        max_length=255,
+        validators=[validate_dns_name],
+        verbose_name=_("Target of the record"),
+        help_text=_(
+            "The domain name of the target host.  There MUST be one or more address records for this name, the name MUST NOT be an alias."
+        ),
+    )
+    status = StatusField(
+        on_delete=models.PROTECT,
+        related_name="%(app_label)s_%(class)s_related",
+    )
+
+    def get_absolute_url(self):
+        """Returns the absolute url to the srvRecord."""
+        return reverse("plugins:nautobot_dns_records:srvrecord", kwargs={"pk": self.pk})

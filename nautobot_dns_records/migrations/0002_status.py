@@ -31,7 +31,7 @@ def reverse_create_status(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("nautobot_dns_records", "0001_initial"),
+        ("nautobot_dns_records", "0003_srvrecord"),
     ]
 
     operations = [

@@ -2,7 +2,15 @@
 from nautobot.core.views import generic
 from nautobot.dcim.models import Device
 
-from nautobot_dns_records.models import AddressRecord, PtrRecord, TxtRecord, CNameRecord, LocRecord, SshfpRecord
+from nautobot_dns_records.models import (
+    AddressRecord,
+    PtrRecord,
+    TxtRecord,
+    CNameRecord,
+    LocRecord,
+    SshfpRecord,
+    SrvRecord,
+)
 from nautobot_dns_records.tables import (
     AddressRecordTable,
     PtrRecordTable,
@@ -10,6 +18,7 @@ from nautobot_dns_records.tables import (
     CnameRecordTable,
     LocRecordTable,
     SshfpRecordTable,
+    SrvRecordTable,
 )
 
 
@@ -33,6 +42,8 @@ class DeviceRecordsTab(generic.ObjectView):
         locrecords_table = LocRecordTable(data=locrecords, user=request.user, orderable=False)
         sshfprecords = SshfpRecord.objects.filter(device=instance).all()
         sshfprecords_table = SshfpRecordTable(data=sshfprecords, user=request.user, orderable=False)
+        srvrecords = SrvRecord.objects.filter(device=instance).all()
+        srvprecords_table = SrvRecordTable(data=srvrecords, user=request.user, orderable=False)
 
         extra_context = {
             "addressrecords_table": addressrecords_table,
@@ -41,6 +52,7 @@ class DeviceRecordsTab(generic.ObjectView):
             "cnamerecords_table": cnamerecords_table,
             "locrecords_table": locrecords_table,
             "sshfprecords_table": sshfprecords_table,
+            "srvrecords_table": srvprecords_table,
         }
         return {
             **extra_context,

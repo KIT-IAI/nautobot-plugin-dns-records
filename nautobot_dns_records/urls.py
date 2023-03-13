@@ -10,6 +10,7 @@ from nautobot_dns_records.views import (
     ptrrecord,
     sshfprecord,
     device_tab,
+    srvrecord,
 )
 
 urlpatterns = [
@@ -51,6 +52,12 @@ urlpatterns = [
     path("sshfp_record/<uuid:pk>/", sshfprecord.SshfpRecordView.as_view(), name="sshfprecord"),
     path("sshfp_record/<uuid:pk>/edit/", sshfprecord.SshfpRecordEditView.as_view(), name="sshfprecord_edit"),
     path("sshfp_record/<uuid:pk>/delete/", sshfprecord.SshfpRecordDeleteView.as_view(), name="sshfprecord_delete"),
+    # SRV Record
+    path("srv_record/", srvrecord.SrvRecordsListView.as_view(), name="srvrecord_list"),
+    path("srvfp_record/add/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_add"),
+    path("srvfp_record/<uuid:pk>/", srvrecord.SrvRecordView.as_view(), name="srvrecord"),
+    path("srvfp_record/<uuid:pk>/edit/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_edit"),
+    path("srvfp_record/<uuid:pk>/delete/", srvrecord.SrvRecordDeleteView.as_view(), name="srvrecord_delete"),
     # Custom Tabs
     path("devices/<uuid:pk>/records/", device_tab.DeviceRecordsTab.as_view(), name="device_records"),
 ]
