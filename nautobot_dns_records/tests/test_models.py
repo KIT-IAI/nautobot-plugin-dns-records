@@ -8,7 +8,16 @@ from nautobot.extras.models import Status
 from nautobot.ipam.models import IPAddress
 from nautobot.utilities.testing import TestCase
 
-from nautobot_dns_records.models import Record, AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
+from nautobot_dns_records.models import (
+    Record,
+    AddressRecord,
+    CNameRecord,
+    TxtRecord,
+    LocRecord,
+    PtrRecord,
+    SshfpRecord,
+    SrvRecord,
+)
 from nautobot_dns_records.tests.helpers import (
     random_valid_dns_ttl,
     random_valid_dns_name,
@@ -397,6 +406,106 @@ class SshfpRecordTestCase(TestCase):
                 algorithm=1,
                 hashType=1,
                 fingerprint="81bc1331bcd5b1c605a142d36af7720afdx6b38c9",
+                status=self.status,
+            )
+            record.clean_fields()
+
+
+class SrvRecordTestCase(TestCase):
+    """Test the SRV Record Model"""
+
+    def setUp(self):
+        self.status = Status.objects.get(slug="active")
+        self.status.content_types.add(ContentType.objects.get_for_model(SrvRecord))
+
+    def test_srv_record_creation(self):
+        record = SrvRecord(
+            label=random_valid_dns_name(),
+            ttl=random_valid_dns_ttl(),
+            priority=10,
+            weight=10,
+            port=80,
+            target=random_valid_dns_name(),
+            status=self.status,
+        )
+        record.clean_fields()
+
+    def test_srv_record_validation(self):
+        with self.assertRaisesMessage(
+            ValidationError, "{'priority': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=-1,
+                weight=10,
+                port=80,
+                target=random_valid_dns_name(),
+                status=self.status,
+            )
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'priority': ['Ensure this value is less than or equal to 65535.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=7000000,
+                weight=10,
+                port=80,
+                target=random_valid_dns_name(),
+                status=self.status,
+            )
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'weight': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=10,
+                weight=-1,
+                port=80,
+                target=random_valid_dns_name(),
+                status=self.status,
+            )
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'weight': ['Ensure this value is less than or equal to 65535.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=10,
+                weight=7000000,
+                port=80,
+                target=random_valid_dns_name(),
+                status=self.status,
+            )
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'port': ['Ensure this value is greater than or equal to 0.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=10,
+                weight=10,
+                port=-1,
+                target=random_valid_dns_name(),
+                status=self.status,
+            )
+            record.clean_fields()
+        with self.assertRaisesMessage(
+            ValidationError, "{'port': ['Ensure this value is less than or equal to 65535.']}"
+        ):
+            record = SrvRecord(
+                label=random_valid_dns_name(),
+                ttl=random_valid_dns_ttl(),
+                priority=10,
+                weight=10,
+                port=7000000,
+                target=random_valid_dns_name(),
                 status=self.status,
             )
             record.clean_fields()
