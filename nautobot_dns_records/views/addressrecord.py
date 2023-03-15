@@ -24,6 +24,23 @@ class AddressRecordEditView(generic.ObjectEditView):
 
     queryset = models.AddressRecord.objects.all()
     model_form = forms.AddressRecordForm
+    template_name = "nautobot_dns_records/addressrecord_edit.html"
+
+    def post(self, request, *args, **kwargs):
+        """Extend build in post method with a ptr record creation."""
+        if request.POST["create_reverse"] == "on":
+            form = self.model_form(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                ptr = models.PtrRecord(
+                    label=form.cleaned_data["label"],
+                    address=form.cleaned_data["address"],
+                    ttl=form.cleaned_data["ttl"],
+                    status=form.cleaned_data["status"],
+                )
+                if form.cleaned_data["device"]:
+                    ptr.device = form.cleaned_data["device"]
+                ptr.save()
+        return super().post(request, *args, **kwargs)
 
 
 class AddressRecordDeleteView(generic.ObjectDeleteView):

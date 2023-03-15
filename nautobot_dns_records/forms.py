@@ -1,7 +1,8 @@
 """Forms for the nautobot dns records plugin."""
-import nautobot.ipam.models
 import nautobot.dcim.models
+import nautobot.ipam.models
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from nautobot.extras.forms import RelationshipModelFormMixin
 from nautobot.utilities.forms import BootstrapMixin, DynamicModelChoiceField
 
@@ -15,6 +16,7 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
     address = DynamicModelChoiceField(
         queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={"device_id": "$device"}
     )
+    create_reverse = forms.BooleanField(label=_("Create reverse record"), required=False)
 
     class Meta:
         model = models.AddressRecord
