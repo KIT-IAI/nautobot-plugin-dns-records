@@ -16,7 +16,7 @@ class NautobotDnsRecordsConfig(PluginConfig):
     caching_config = {}  # Plugin-specific cache configuration.
     author = "Daniel Bacher"
     author_email = "bacher@kit.edu"
-    version = "0.1.0"
+    version = "0.2.0"
     description = "This plugin allows to manage DNS records in Nautobot"
 
 
