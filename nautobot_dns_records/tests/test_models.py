@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from nautobot.dcim.models import Device
 from nautobot.extras.models import Status
 from nautobot.ipam.models import IPAddress
-from nautobot.utilities.testing import TestCase
+from nautobot.apps.testing import TestCase
 
 from nautobot_dns_records.models import (
     Record,
@@ -75,7 +75,7 @@ class RecordTestCase(AbstractModelMixinTestCase):
     def test_str(self):
         record = self.model(label=random_valid_dns_name(), ttl=1)
         record.save()
-        self.assertEqual(record.__str__(), record.label)
+        self.assertEqual(str(record), record.label)
 
     def test_device_assignment(self):
         record = self.model(label=random_valid_dns_name(), ttl=1, device=self.device)
@@ -85,29 +85,36 @@ class RecordTestCase(AbstractModelMixinTestCase):
 class AddressRecordTestCase(TestCase):
     """Test the AddressRecord Model"""
 
-    def setUp(self):
-        self.test_ipv4 = IPAddress(address=random_ipv4_address())
-        self.test_ipv6 = IPAddress(address=random_ipv6_address())
+    def setUp(self):  # pylint: disable=invalid-name
+        self.testIPv4 = IPAddress(address=random_ipv4_address())
+        self.testIPv6 = IPAddress(address=random_ipv6_address())
 
     def test_record_creation_ipv4(self):
-        record_v4 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv4)
-        self.assertEqual(record_v4.address, self.test_ipv4)
+        record_v4 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv4)
+        self.assertEqual(record_v4.address, self.testIPv4)
 
     def test_record_creation_ipv6(self):
-        record_v6 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
-        self.assertEqual(record_v6.address, self.test_ipv6)
+        record_v6 = AddressRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv6)
+        self.assertEqual(record_v6.address, self.testIPv6)
 
 
 class CNameRecordTestCase(TestCase):
     """Test the CNameRecord Model"""
 
+    def setUp(self):  # pylint: disable=invalid-name
+        self.status = Status.objects.get(name="Active")
+
     def test_record_creation(self):
         target = random_valid_dns_name()
-        record = CNameRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target=target)
+        record = CNameRecord(
+            label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target=target, status=self.status
+        )
         self.assertEqual(record.target, target)
 
     def test_record_target_encoding(self):
-        record = CNameRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target="💩.test")
+        record = CNameRecord(
+            label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), target="💩.test", status=self.status
+        )
         record.save()
         self.assertEqual(record.target, "xn--ls8h.test")
 
@@ -124,8 +131,8 @@ class TxtRecordTestCase(TestCase):
 class LocRecordTestCase(TestCase):
     """Test the LocRecord Model"""
 
-    def setUp(self):
-        self.status = Status.objects.get(slug="active")
+    def setUp(self):  # pylint: disable=invalid-name
+        self.status = Status.objects.get(name="Active")
         self.status.content_types.add(ContentType.objects.get_for_model(LocRecord))
 
     def test_loc_record_creation(self):
@@ -367,24 +374,24 @@ class LocRecordTestCase(TestCase):
 class PtrRecordTestCase(TestCase):
     """Test the PtrRecord Model."""
 
-    def setUp(self):
-        self.test_ipv4 = IPAddress(address=random_ipv4_address())
-        self.test_ipv6 = IPAddress(address=random_ipv6_address())
+    def setUp(self):  # pylint: disable=invalid-name
+        self.testIPv4 = IPAddress(address=random_ipv4_address())
+        self.testIPv6 = IPAddress(address=random_ipv6_address())
 
     def test_ptr_record_creation_ipv4(self):
-        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv4)
-        self.assertEqual(record.address, self.test_ipv4)
+        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv4)
+        self.assertEqual(record.address, self.testIPv4)
 
     def test_ptr_record_creation_ipv6(self):
-        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.test_ipv6)
-        self.assertEqual(record.address, self.test_ipv6)
+        record = PtrRecord(label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv6)
+        self.assertEqual(record.address, self.testIPv6)
 
 
 class SshfpRecordTestCase(TestCase):
     """Test the SSHFP Record Model."""
 
-    def setUp(self):
-        self.status = Status.objects.get(slug="active")
+    def setUp(self):  # pylint: disable=invalid-name
+        self.status = Status.objects.get(name="Active")
         self.status.content_types.add(ContentType.objects.get_for_model(SshfpRecord))
 
     def test_sshfp_record_creation(self):
@@ -414,8 +421,8 @@ class SshfpRecordTestCase(TestCase):
 class SrvRecordTestCase(TestCase):
     """Test the SRV Record Model"""
 
-    def setUp(self):
-        self.status = Status.objects.get(slug="active")
+    def setUp(self):  # pylint: disable=invalid-name
+        self.status = Status.objects.get(name="Active")
         self.status.content_types.add(ContentType.objects.get_for_model(SrvRecord))
 
     def test_srv_record_creation(self):

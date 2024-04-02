@@ -1,4 +1,5 @@
 """Helpers for test execution."""
+
 from faker import Faker
 
 faker = Faker()

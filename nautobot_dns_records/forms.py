@@ -1,10 +1,11 @@
 """Forms for the nautobot dns records plugin."""
+
 import nautobot.dcim.models
 import nautobot.ipam.models
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from nautobot.extras.forms import RelationshipModelFormMixin
-from nautobot.utilities.forms import BootstrapMixin, DynamicModelChoiceField
+from nautobot.apps.forms import BootstrapMixin, DynamicModelChoiceField
 
 from nautobot_dns_records import models
 

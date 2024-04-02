@@ -1,4 +1,5 @@
 """Add a tab to the device object view."""
+
 from nautobot.core.views import generic
 from nautobot.dcim.models import Device
 

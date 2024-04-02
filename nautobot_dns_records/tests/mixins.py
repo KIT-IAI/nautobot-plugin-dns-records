@@ -5,7 +5,7 @@ Source: https://stackoverflow.com/a/51146819
 from django.db import connection
 from django.db.models.base import ModelBase
 from django.db.utils import OperationalError, ProgrammingError
-from nautobot.utilities.testing import TestCase
+from nautobot.apps.testing import TestCase
 
 
 class AbstractModelMixinTestCase(TestCase):
