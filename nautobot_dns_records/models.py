@@ -12,7 +12,6 @@ from django.utils.translation import gettext_lazy as _
 from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.models import StatusField
 from nautobot.extras.utils import extras_features
-from nautobot.extras.models import Status
 
 from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS, SSHFP_HASH_TYPE, SSHFP_ALGORITHMS
 from nautobot_dns_records.validators import validate_dns_name
