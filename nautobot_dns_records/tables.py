@@ -47,7 +47,7 @@ class LocRecordTable(StatusTableMixin, BaseTable):
         fields = ("pk", "label", "device")
 
 
-class CnameRecordTable(StatusTableMixin, BaseTable):
+class CNameRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
     pk = ToggleColumn()

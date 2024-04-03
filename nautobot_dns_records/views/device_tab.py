@@ -16,7 +16,7 @@ from nautobot_dns_records.tables import (
     AddressRecordTable,
     PtrRecordTable,
     TxtRecordTable,
-    CnameRecordTable,
+    CNameRecordTable,
     LocRecordTable,
     SshfpRecordTable,
     SrvRecordTable,
@@ -38,7 +38,7 @@ class DeviceRecordsTab(generic.ObjectView):
         txtrecords = TxtRecord.objects.filter(device=instance).all()
         txtrecords_table = TxtRecordTable(data=txtrecords, user=request.user, orderable=False)
         cnamerecords = CNameRecord.objects.filter(device=instance).all()
-        cnamerecords_table = CnameRecordTable(data=cnamerecords, user=request.user, orderable=False)
+        cnamerecords_table = CNameRecordTable(data=cnamerecords, user=request.user, orderable=False)
         locrecords = LocRecord.objects.filter(device=instance).all()
         locrecords_table = LocRecordTable(data=locrecords, user=request.user, orderable=False)
         sshfprecords = SshfpRecord.objects.filter(device=instance).all()
