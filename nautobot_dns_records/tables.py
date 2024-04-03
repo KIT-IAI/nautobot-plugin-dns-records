@@ -1,3 +1,4 @@
+# pylint: disable=nb-use-fields-all  >> https://github.com/nautobot/pylint-nautobot/pull/83
 """Table Views for DNS Models."""
 
 import django_tables2 as tables
