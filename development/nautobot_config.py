@@ -437,3 +437,5 @@ PLUGINS = ["nautobot_dns_records"]
 # or a package containing an application.
 # https://docs.nautobot.com/projects/core/en/latest/configuration/optional-settings/#extra-applications
 # EXTRA_INSTALLED_APPS = []
+
+TEST_USE_FACTORIES = True
