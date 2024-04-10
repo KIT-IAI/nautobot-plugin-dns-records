@@ -16,6 +16,7 @@ from nautobot.extras.utils import extras_features
 from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS, SSHFP_HASH_TYPE, SSHFP_ALGORITHMS
 from nautobot_dns_records.validators import validate_dns_name
 
+from django.db.models.constraints import UniqueConstraint
 
 class Record(models.Model):
     """Abstract class that represents a base dns model.
@@ -80,6 +81,11 @@ class AddressRecord(PrimaryModel, Record):
 
     status = StatusField(on_delete=models.PROTECT, related_name="%(app_label)s_%(class)s_related")
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields = ["label", "address"], name="arec_unique_label_address_combination")
+        ]
+
 
 @extras_features(
     "custom_fields",
@@ -113,6 +119,10 @@ class CNameRecord(PrimaryModel, Record):
         self.target = codecs.encode(self.target, encoding="idna").decode()
         super().save()
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields = ["label"], name="unique_label")
+        ]
 
 @extras_features(
     "custom_fields",
@@ -131,7 +141,10 @@ class TxtRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
-
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields = ["label", "value"], name="txt_unique_label_value_combination")
+        ]
 
 @extras_features(
     "custom_fields",
@@ -225,6 +238,10 @@ class LocRecord(PrimaryModel, Record):
     #     """Returns the absolute url to the locRecord."""
     #     return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields = ["label"], name="loc_unique_label")
+        ]
 
 @extras_features("custom_fields", "graphql", "statuses")
 class PtrRecord(PrimaryModel, Record):
@@ -248,6 +265,11 @@ class PtrRecord(PrimaryModel, Record):
     # def get_absolute_url(self):
     #     """Returns the absolute url to the ptrRecord."""
     #     return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields = ["label", "address"], name="ptr_unique_label_address")
+        ]
 
 
 @extras_features(

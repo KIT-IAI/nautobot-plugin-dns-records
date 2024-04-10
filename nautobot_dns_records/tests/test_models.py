@@ -3,6 +3,7 @@
 import django.db.models.fields
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
+from django.db.utils import IntegrityError
 from nautobot.apps.testing import TestCase
 from nautobot.dcim.models import Device
 from nautobot.extras.models import Status
@@ -102,6 +103,12 @@ class AddressRecordTestCase(TestCase):
         record_v6.save()
         self.assertEqual(record_v6.address, self.testIPv6)
 
+    def test_uniqueness(self):
+        label = random_valid_dns_name()
+        with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
+            AddressRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
+            AddressRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
+
 
 class CNameRecordTestCase(TestCase):
     """Test the CNameRecord Model"""
@@ -124,6 +131,18 @@ class CNameRecordTestCase(TestCase):
         record.save()
         self.assertEqual(record.target, "xn--ls8h.test")
 
+    def test_record_uniqueness(self):
+        target = random_valid_dns_name()
+        label = random_valid_dns_name()
+        with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
+            record1 = CNameRecord(
+                label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status
+            )
+            record1.save()
+            record2 = CNameRecord(
+                label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status
+            )
+            record2.save()
 
 class TxtRecordTestCase(TestCase):
     """Test the TxtRecord Model"""
@@ -137,6 +156,12 @@ class TxtRecordTestCase(TestCase):
         record.save()
         self.assertEqual(record.value, value)
 
+    def test_txt_record_uniqueness(self):
+        value = "This is a test!"
+        label = random_valid_dns_name()
+        with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
+            TxtRecord(label=label, ttl=random_valid_dns_ttl(), value=value, status=self.status).save()
+            TxtRecord(label=label, ttl=random_valid_dns_ttl(), value=value, status=self.status).save()
 
 class LocRecordTestCase(TestCase):
     """Test the LocRecord Model"""
@@ -411,6 +436,15 @@ class PtrRecordTestCase(TestCase):
         record.save()
         self.assertEqual(record.address, self.testIPv6)
 
+    def test_ptr_record_uniqueness(self):
+        label = random_valid_dns_name()
+        with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
+            PtrRecord(
+                label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
+            ).save()
+            PtrRecord(
+                label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
+            ).save()
 
 class SshfpRecordTestCase(TestCase):
     """Test the SSHFP Record Model."""
