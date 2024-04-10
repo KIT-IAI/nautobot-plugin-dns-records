@@ -18,6 +18,7 @@ from nautobot_dns_records.validators import validate_dns_name
 
 from django.db.models.constraints import UniqueConstraint
 
+
 class Record(models.Model):
     """Abstract class that represents a base dns model.
 
@@ -82,9 +83,7 @@ class AddressRecord(PrimaryModel, Record):
     status = StatusField(on_delete=models.PROTECT, related_name="%(app_label)s_%(class)s_related")
 
     class Meta:
-        constraints = [
-            UniqueConstraint(fields = ["label", "address"], name="arec_unique_label_address_combination")
-        ]
+        constraints = [UniqueConstraint(fields=["label", "address"], name="arec_unique_label_address_combination")]
 
 
 @extras_features(
@@ -120,9 +119,8 @@ class CNameRecord(PrimaryModel, Record):
         super().save()
 
     class Meta:
-        constraints = [
-            UniqueConstraint(fields = ["label"], name="unique_label")
-        ]
+        constraints = [UniqueConstraint(fields=["label"], name="unique_label")]
+
 
 @extras_features(
     "custom_fields",
@@ -141,10 +139,10 @@ class TxtRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
+
     class Meta:
-        constraints = [
-            UniqueConstraint(fields = ["label", "value"], name="txt_unique_label_value_combination")
-        ]
+        constraints = [UniqueConstraint(fields=["label", "value"], name="txt_unique_label_value_combination")]
+
 
 @extras_features(
     "custom_fields",
@@ -239,9 +237,8 @@ class LocRecord(PrimaryModel, Record):
     #     return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
     class Meta:
-        constraints = [
-            UniqueConstraint(fields = ["label"], name="loc_unique_label")
-        ]
+        constraints = [UniqueConstraint(fields=["label"], name="loc_unique_label")]
+
 
 @extras_features("custom_fields", "graphql", "statuses")
 class PtrRecord(PrimaryModel, Record):
@@ -267,9 +264,7 @@ class PtrRecord(PrimaryModel, Record):
     #     return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
 
     class Meta:
-        constraints = [
-            UniqueConstraint(fields = ["label", "address"], name="ptr_unique_label_address")
-        ]
+        constraints = [UniqueConstraint(fields=["label", "address"], name="ptr_unique_label_address")]
 
 
 @extras_features(

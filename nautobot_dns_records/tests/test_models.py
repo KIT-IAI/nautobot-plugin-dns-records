@@ -135,14 +135,11 @@ class CNameRecordTestCase(TestCase):
         target = random_valid_dns_name()
         label = random_valid_dns_name()
         with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
-            record1 = CNameRecord(
-                label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status
-            )
+            record1 = CNameRecord(label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status)
             record1.save()
-            record2 = CNameRecord(
-                label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status
-            )
+            record2 = CNameRecord(label=label, ttl=random_valid_dns_ttl(), target=target, status=self.status)
             record2.save()
+
 
 class TxtRecordTestCase(TestCase):
     """Test the TxtRecord Model"""
@@ -162,6 +159,7 @@ class TxtRecordTestCase(TestCase):
         with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
             TxtRecord(label=label, ttl=random_valid_dns_ttl(), value=value, status=self.status).save()
             TxtRecord(label=label, ttl=random_valid_dns_ttl(), value=value, status=self.status).save()
+
 
 class LocRecordTestCase(TestCase):
     """Test the LocRecord Model"""
@@ -439,12 +437,9 @@ class PtrRecordTestCase(TestCase):
     def test_ptr_record_uniqueness(self):
         label = random_valid_dns_name()
         with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
-            PtrRecord(
-                label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
-            ).save()
-            PtrRecord(
-                label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
-            ).save()
+            PtrRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
+            PtrRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
+
 
 class SshfpRecordTestCase(TestCase):
     """Test the SSHFP Record Model."""
