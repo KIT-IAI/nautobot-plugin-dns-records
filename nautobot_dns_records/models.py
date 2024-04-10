@@ -6,7 +6,7 @@ import nautobot.dcim.models
 import nautobot.ipam.models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
-
+from django.db.models.constraints import UniqueConstraint
 # from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from nautobot.core.models.generics import PrimaryModel
@@ -15,8 +15,6 @@ from nautobot.extras.utils import extras_features
 
 from nautobot_dns_records.choices import LATITUDE_DIRECTIONS, LONGITUDE_DIRECTIONS, SSHFP_HASH_TYPE, SSHFP_ALGORITHMS
 from nautobot_dns_records.validators import validate_dns_name
-
-from django.db.models.constraints import UniqueConstraint
 
 
 class Record(models.Model):
