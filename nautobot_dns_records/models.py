@@ -6,7 +6,9 @@ import nautobot.dcim.models
 import nautobot.ipam.models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
-from django.urls import reverse
+from django.db.models.constraints import UniqueConstraint
+
+# from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from nautobot.core.models.generics import PrimaryModel
 from nautobot.extras.models import StatusField
@@ -77,14 +79,10 @@ class AddressRecord(PrimaryModel, Record):
         help_text=_("Related IP Address for the record."),
     )
 
-    status = StatusField(
-        on_delete=models.PROTECT,
-        related_name="%(app_label)s_%(class)s_related",
-    )
+    status = StatusField(on_delete=models.PROTECT, related_name="%(app_label)s_%(class)s_related")
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the addressRecord."""
-        return reverse("plugins:nautobot_dns_records:addressrecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "address"], name="arec_unique_label_address_combination")]
 
 
 @extras_features(
@@ -119,9 +117,8 @@ class CNameRecord(PrimaryModel, Record):
         self.target = codecs.encode(self.target, encoding="idna").decode()
         super().save()
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the cnameRecord."""
-        return reverse("plugins:nautobot_dns_records:cnamerecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label"], name="unique_label")]
 
 
 @extras_features(
@@ -142,9 +139,8 @@ class TxtRecord(PrimaryModel, Record):
         related_name="%(app_label)s_%(class)s_related",
     )
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the txtRecord."""
-        return reverse("plugins:nautobot_dns_records:txtrecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "value"], name="txt_unique_label_value_combination")]
 
 
 @extras_features(
@@ -234,10 +230,13 @@ class LocRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
+    #
+    # def get_absolute_url(self):
+    #     """Returns the absolute url to the locRecord."""
+    #     return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the locRecord."""
-        return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label"], name="loc_unique_label")]
 
 
 @extras_features("custom_fields", "graphql", "statuses")
@@ -258,10 +257,13 @@ class PtrRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
+    #
+    # def get_absolute_url(self):
+    #     """Returns the absolute url to the ptrRecord."""
+    #     return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the ptrRecord."""
-        return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "address"], name="ptr_unique_label_address")]
 
 
 @extras_features(
@@ -302,10 +304,10 @@ class SshfpRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
-
-    def get_absolute_url(self):
-        """Returns the absolute url to the sshfpRecord."""
-        return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
+    #
+    # def get_absolute_url(self):
+    #     """Returns the absolute url to the sshfpRecord."""
+    #     return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
 
 
 @extras_features("custom_fields", "graphql", "statuses")
@@ -348,6 +350,6 @@ class SrvRecord(PrimaryModel, Record):
         related_name="%(app_label)s_%(class)s_related",
     )
 
-    def get_absolute_url(self):
-        """Returns the absolute url to the srvRecord."""
-        return reverse("plugins:nautobot_dns_records:srvrecord", kwargs={"pk": self.pk})
+    # def get_absolute_url(self):
+    #     """Returns the absolute url to the srvRecord."""
+    #     return reverse("plugins:nautobot_dns_records:srvrecord", kwargs={"pk": self.pk})

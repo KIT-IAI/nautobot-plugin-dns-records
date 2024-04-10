@@ -10,7 +10,7 @@ class CnameRecordsListView(generic.ObjectListView):
     """List all CName Records."""
 
     queryset = models.CNameRecord.objects.all()
-    table = tables.CnameRecordTable
+    table = tables.CNameRecordTable
     action_buttons = ("add",)
 
 

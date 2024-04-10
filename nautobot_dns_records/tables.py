@@ -1,8 +1,9 @@
+# pylint: disable=nb-use-fields-all
 """Table Views for DNS Models."""
 
 import django_tables2 as tables
 from nautobot.extras.tables import StatusTableMixin
-from nautobot.utilities.tables import BaseTable, ToggleColumn, ButtonsColumn
+from nautobot.apps.tables import BaseTable, ToggleColumn, ButtonsColumn
 
 from nautobot_dns_records import models
 
@@ -46,7 +47,7 @@ class LocRecordTable(StatusTableMixin, BaseTable):
         fields = ("pk", "label", "device")
 
 
-class CnameRecordTable(StatusTableMixin, BaseTable):
+class CNameRecordTable(StatusTableMixin, BaseTable):
     """Table for all record based models."""
 
     pk = ToggleColumn()

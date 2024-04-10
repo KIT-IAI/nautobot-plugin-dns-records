@@ -10,7 +10,7 @@ packages = [
 readme = "readme.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.8,<3.12"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"
@@ -25,7 +25,7 @@ pylint-django = "*"
 yamllint = "*"
 Markdown = "*"
 Faker = "*"
-nautobot = "~1.5"
+nautobot = "2.1"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
@@ -33,6 +33,10 @@ factory-boy = "^3.2.1"
 pydocstyle = "^6.3.0"
 coverage = {extras = ["toml"], version = "^7.2.1"}
 django-slowtests = "^1.1.1"
+selenium = "^4.18.1"
+splinter = "^0.21.0"
+setuptools = "^69.2.0"
+pylint-nautobot = "^0.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -63,19 +67,19 @@ exclude = '''
 
 [tool.pylint.master]
 # Include the pylint_django plugin to avoid spurious warnings about Django patterns
-load-plugins="pylint_django"
+load-plugins="pylint_django, pylint_nautobot"
 ignore=["jinja_filters.py", ".venv"]
 
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
-no-docstring-rgx="^(_|test_|Meta$)"
+no-docstring-rgx="^(_|test_|setUp|Meta$)"
+attr-naming-style = "camelCase"
 
 [tool.pylint.messages_control]
 # Line length is enforced by Black, so pylint doesn't need to check it.
 # Pylint and Black disagree about how to format multi-line arrays; Black wins.
 disable = """,
     line-too-long,
-    bad-continuation,
     too-few-public-methods,
     duplicate-code,
     """
@@ -89,6 +93,11 @@ notes = """,
 
 [tool.pylint.design]
 max-parents = 10
+
+[tool.pylint-nautobot]
+supported_nautobot_versions = [
+    "2"
+]
 
 [tool.pydocstyle]
 convention = "google"
