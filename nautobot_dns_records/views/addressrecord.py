@@ -28,7 +28,7 @@ class AddressRecordEditView(generic.ObjectEditView):
 
     def post(self, request, *args, **kwargs):
         """Extend build in post method with a ptr record creation."""
-        if request.POST["create_reverse"] == "on":
+        if request.POST.get("create_reverse") == "on":
             form = self.model_form(data=request.POST, files=request.FILES)
             if form.is_valid():
                 ptr = models.PtrRecord(
