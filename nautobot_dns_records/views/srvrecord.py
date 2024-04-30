@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import SrvRecordFilterSet
 
 
 class SrvRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class SrvRecordsListView(generic.ObjectListView):
     queryset = models.SrvRecord.objects.all()
     table = tables.SrvRecordTable
     action_buttons = ("add",)
+    filterset_class = SrvRecordFilterSet
 
 
 class SrvRecordView(generic.ObjectView):
