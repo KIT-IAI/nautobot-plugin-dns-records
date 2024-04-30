@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import PtrRecordFilterSet
 
 
 class PtrRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class PtrRecordsListView(generic.ObjectListView):
     queryset = models.PtrRecord.objects.all()
     table = tables.PtrRecordTable
     action_buttons = ("add",)
+    filterset_class = PtrRecordFilterSet
 
 
 class PtrRecordView(generic.ObjectView):

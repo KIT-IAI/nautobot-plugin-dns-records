@@ -3,6 +3,7 @@
 from nautobot.core.views import generic
 
 from nautobot_dns_records import models, tables, forms
+from nautobot_dns_records.filters import AddressRecordFilterSet
 
 
 class AddressRecordsListView(generic.ObjectListView):
@@ -11,6 +12,7 @@ class AddressRecordsListView(generic.ObjectListView):
     queryset = models.AddressRecord.objects.all()
     table = tables.AddressRecordTable
     action_buttons = ("add",)
+    filterset_class = AddressRecordFilterSet
 
 
 class AddressRecordView(generic.ObjectView):

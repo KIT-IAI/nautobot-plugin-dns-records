@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import TxtRecordFilterSet
 
 
 class TxtRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class TxtRecordsListView(generic.ObjectListView):
     queryset = models.TxtRecord.objects.all()
     table = tables.TxtRecordTable
     action_buttons = ("add",)
+    filterset_class = TxtRecordFilterSet
 
 
 class TxtRecordView(generic.ObjectView):
