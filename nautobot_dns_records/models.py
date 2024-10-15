@@ -309,6 +309,9 @@ class SshfpRecord(PrimaryModel, Record):
     #     """Returns the absolute url to the sshfpRecord."""
     #     return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
 
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "fingerprint"], name="sshfp_unique_label_fingerprint")]
+
 
 @extras_features("custom_fields", "graphql", "statuses")
 class SrvRecord(PrimaryModel, Record):
@@ -353,3 +356,6 @@ class SrvRecord(PrimaryModel, Record):
     # def get_absolute_url(self):
     #     """Returns the absolute url to the srvRecord."""
     #     return reverse("plugins:nautobot_dns_records:srvrecord", kwargs={"pk": self.pk})
+
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "target", "port"], name="srv_unique_label_target_port")]
