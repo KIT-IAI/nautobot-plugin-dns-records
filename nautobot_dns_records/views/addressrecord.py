@@ -12,7 +12,8 @@ class AddressRecordsListView(generic.ObjectListView):
     queryset = models.AddressRecord.objects.all()
     table = tables.AddressRecordTable
     action_buttons = ("add",)
-    filterset_class = AddressRecordFilterSet
+    filterset = AddressRecordFilterSet
+    filterset_form = forms.AddressRecordFilterForm
 
 
 class AddressRecordView(generic.ObjectView):
