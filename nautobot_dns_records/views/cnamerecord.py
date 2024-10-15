@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import CNameRecordFilterSet
 
 
 class CnameRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class CnameRecordsListView(generic.ObjectListView):
     queryset = models.CNameRecord.objects.all()
     table = tables.CNameRecordTable
     action_buttons = ("add",)
+    filterset_class = CNameRecordFilterSet
 
 
 class CnameRecordView(generic.ObjectView):

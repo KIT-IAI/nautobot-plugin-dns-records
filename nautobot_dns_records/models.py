@@ -230,10 +230,6 @@ class LocRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
-    #
-    # def get_absolute_url(self):
-    #     """Returns the absolute url to the locRecord."""
-    #     return reverse("plugins:nautobot_dns_records:locrecord", kwargs={"pk": self.pk})
 
     class Meta:
         constraints = [UniqueConstraint(fields=["label"], name="loc_unique_label")]
@@ -257,10 +253,6 @@ class PtrRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
-    #
-    # def get_absolute_url(self):
-    #     """Returns the absolute url to the ptrRecord."""
-    #     return reverse("plugins:nautobot_dns_records:ptrrecord", kwargs={"pk": self.pk})
 
     class Meta:
         constraints = [UniqueConstraint(fields=["label", "address"], name="ptr_unique_label_address")]
@@ -304,10 +296,9 @@ class SshfpRecord(PrimaryModel, Record):
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
-    #
-    # def get_absolute_url(self):
-    #     """Returns the absolute url to the sshfpRecord."""
-    #     return reverse("plugins:nautobot_dns_records:sshfprecord", kwargs={"pk": self.pk})
+
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "fingerprint"], name="sshfp_unique_label_fingerprint")]
 
 
 @extras_features("custom_fields", "graphql", "statuses")
@@ -350,6 +341,5 @@ class SrvRecord(PrimaryModel, Record):
         related_name="%(app_label)s_%(class)s_related",
     )
 
-    # def get_absolute_url(self):
-    #     """Returns the absolute url to the srvRecord."""
-    #     return reverse("plugins:nautobot_dns_records:srvrecord", kwargs={"pk": self.pk})
+    class Meta:
+        constraints = [UniqueConstraint(fields=["label", "target", "port"], name="srv_unique_label_target_port")]

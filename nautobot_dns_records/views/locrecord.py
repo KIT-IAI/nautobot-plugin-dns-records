@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import LocRecordFilterSet
 
 
 class LocRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class LocRecordsListView(generic.ObjectListView):
     queryset = models.LocRecord.objects.all()
     table = tables.LocRecordTable
     action_buttons = ("add",)
+    filterset_class = LocRecordFilterSet
 
 
 class LocRecordView(generic.ObjectView):

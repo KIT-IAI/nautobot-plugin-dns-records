@@ -4,6 +4,7 @@ from nautobot.core.views import generic
 
 from nautobot_dns_records import models, forms
 from nautobot_dns_records import tables
+from nautobot_dns_records.filters import SshfpRecordFilterSet
 
 
 class SshfpRecordsListView(generic.ObjectListView):
@@ -12,6 +13,7 @@ class SshfpRecordsListView(generic.ObjectListView):
     queryset = models.SshfpRecord.objects.all()
     table = tables.SshfpRecordTable
     action_buttons = ("add",)
+    filterset_class = SshfpRecordFilterSet
 
 
 class SshfpRecordView(generic.ObjectView):

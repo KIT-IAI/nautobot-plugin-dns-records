@@ -19,5 +19,15 @@ class NautobotDnsRecordsConfig(NautobotAppConfig):
     version = "0.2.0"
     description = "This plugin allows to manage DNS records in Nautobot"
 
+    searchable_models = [
+        "addressrecord",
+        "txtrecord",
+        "locrecord",
+        "cnamerecord",
+        "ptrrecord",
+        "sshfprecord",
+        "srvrecord",
+    ]
+
 
 config = NautobotDnsRecordsConfig  # pylint:disable=invalid-name
