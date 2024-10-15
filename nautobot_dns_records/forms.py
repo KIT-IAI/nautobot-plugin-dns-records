@@ -4,7 +4,8 @@ import nautobot.dcim.models
 import nautobot.ipam.models
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from nautobot.extras.forms import RelationshipModelFormMixin
+from nautobot.core.forms import TagFilterField
+from nautobot.extras.forms import RelationshipModelFormMixin, NautobotFilterForm, StatusModelFilterFormMixin
 from nautobot.apps.forms import BootstrapMixin, DynamicModelChoiceField
 
 from nautobot_dns_records import models
@@ -22,6 +23,23 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
     class Meta:
         model = models.AddressRecord
         fields = ["label", "ttl", "device", "address", "status", "tags"]
+
+
+class AddressRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the Address Record list view."""
+    model = models.AddressRecord
+    field_order = ["q", "label", "device", "address", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label = forms.CharField(required=False, label=_("Label"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+    address = DynamicModelChoiceField(
+        queryset=nautobot.ipam.models.IPAddress.objects.all(),
+        required=False,
+    )
+    tags = TagFilterField(model)
 
 
 class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
