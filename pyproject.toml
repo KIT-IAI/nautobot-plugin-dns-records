@@ -25,7 +25,7 @@ pylint-django = "*"
 yamllint = "*"
 Markdown = "*"
 Faker = "*"
-nautobot = "2.1"
+nautobot = "~2.1"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
