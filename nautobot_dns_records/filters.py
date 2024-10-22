@@ -1,6 +1,6 @@
 """ Nautobot DNS-Records filters """
-
-from nautobot.apps.filters import BaseFilterSet, SearchFilter
+from nautobot.apps.filters import BaseFilterSet, SearchFilter, MappedPredicatesFilterMixin
+from nautobot.extras.filters import NautobotFilterSet
 
 from nautobot_dns_records.models import (
     AddressRecord,
@@ -15,12 +15,6 @@ from nautobot_dns_records.models import (
 
 class AddressRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Address records."""
-
-    q = SearchFilter(
-        filter_predicates={
-            "label": "icontains",
-        }
-    )
 
     class Meta:
         model = AddressRecord
