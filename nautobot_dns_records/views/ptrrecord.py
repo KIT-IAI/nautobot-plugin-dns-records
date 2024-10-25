@@ -13,7 +13,8 @@ class PtrRecordsListView(generic.ObjectListView):
     queryset = models.PtrRecord.objects.all()
     table = tables.PtrRecordTable
     action_buttons = ("add",)
-    filterset_class = PtrRecordFilterSet
+    filterset = PtrRecordFilterSet
+    filterset_form = forms.PtrRecordFilterForm
 
 
 class PtrRecordView(generic.ObjectView):

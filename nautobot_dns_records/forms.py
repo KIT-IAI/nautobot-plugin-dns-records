@@ -116,6 +116,23 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
         fields = ["label", "ttl", "device", "address", "status", "tags"]
 
 
+class PtrRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the PTR Record list view."""
+
+    model = models.PtrRecord
+    field_order = ["q", "label__ic", "device", "address", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+    address = DynamicModelChoiceField(
+        queryset=nautobot.ipam.models.IPAddress.objects.all(),
+        required=False,
+    )
+
+
 class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """SSHFP Record create/edit form."""
 
