@@ -52,6 +52,20 @@ class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
         fields = ["label", "ttl", "target", "device", "status", "tags"]
 
 
+class CnameRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the CName Record list view."""
+
+    model = models.CNameRecord
+    field_order = ["q", "label__ic", "target", "device", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
+    target = forms.CharField(required=False, label=_("Target"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+
+
 class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """LOC Record create/edit form."""
 
