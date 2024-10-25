@@ -13,7 +13,8 @@ class SshfpRecordsListView(generic.ObjectListView):
     queryset = models.SshfpRecord.objects.all()
     table = tables.SshfpRecordTable
     action_buttons = ("add",)
-    filterset_class = SshfpRecordFilterSet
+    filterset = SshfpRecordFilterSet
+    filterset_form = forms.SshfpRecordFilterForm
 
 
 class SshfpRecordView(generic.ObjectView):

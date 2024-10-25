@@ -143,6 +143,20 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
         fields = ["label", "ttl", "algorithm", "hashType", "fingerprint", "device", "status", "tags"]
 
 
+class SshfpRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the SSHFP Record"""
+
+    model = models.PtrRecord
+    field_order = ["q", "label__ic", "device", "fingerprint", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+    fingerprint = forms.CharField(required=False, label=_("Fingerprint"))
+
+
 class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """TXT Record create/edit form."""
 
