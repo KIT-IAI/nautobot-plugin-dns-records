@@ -90,6 +90,19 @@ class LocRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
         ]
 
 
+class LocRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the LOC Record list view."""
+
+    model = models.LocRecord
+    field_order = ["q", "label__ic", "device", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+
+
 class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """PTR Record create/edit form."""
 
