@@ -27,10 +27,11 @@ class AddressRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelF
 
 class AddressRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
     """Filters for the Address Record list view."""
+
     model = models.AddressRecord
-    field_order = ["q", "label", "device", "address", "status"]
+    field_order = ["q", "label__ic", "device", "address", "status"]
     q = forms.CharField(required=False, label=_("Search"))
-    label = forms.CharField(required=False, label=_("Label"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
     device = DynamicModelChoiceField(
         queryset=nautobot.dcim.models.Device.objects.all(),
         required=False,
@@ -39,7 +40,6 @@ class AddressRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
         queryset=nautobot.ipam.models.IPAddress.objects.all(),
         required=False,
     )
-    tags = TagFilterField(model)
 
 
 class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
