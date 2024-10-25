@@ -166,6 +166,18 @@ class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
         model = models.TxtRecord
         fields = ["label", "ttl", "value", "device", "status", "tags"]
 
+class TxTRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+    """Filters for the TXT Record list view."""
+
+    model = models.TxtRecord
+    field_order = ["q", "label__ic", "device", "value", "status"]
+    q = forms.CharField(required=False, label=_("Search"))
+    label__ic = forms.CharField(required=False, label=_("Label"))
+    device = DynamicModelChoiceField(
+        queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+    value = forms.CharField(required=False, label=_("Value"))
 
 class SrvRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm):
     """SRV Record create/edit form."""
