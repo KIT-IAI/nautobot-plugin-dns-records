@@ -34,6 +34,10 @@ class DeviceExtraTabs(PluginTemplateExtension):
         """Add additional content to the left page of the device detail view."""
         return ""
 
+    def list_buttons(self):
+        """Add additional buttons to the buttons of the device detail view."""
+        return ""
+
 
 template_extensions = [
     DeviceExtraTabs,
