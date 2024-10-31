@@ -143,7 +143,7 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 
 
 class SshfpRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
-    """Filters for the SSHFP Record"""
+    """Filters for the SSHFP Record."""
 
     model = models.SshfpRecord
     field_order = ["q", "label__ic", "device", "fingerprint", "status"]

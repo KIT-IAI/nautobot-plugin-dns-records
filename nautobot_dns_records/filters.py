@@ -1,4 +1,4 @@
-""" Nautobot DNS-Records filters """
+"""Nautobot DNS-Records filters."""
 
 from nautobot.apps.filters import BaseFilterSet
 
