@@ -13,7 +13,8 @@ class TxtRecordsListView(generic.ObjectListView):
     queryset = models.TxtRecord.objects.all()
     table = tables.TxtRecordTable
     action_buttons = ("add",)
-    filterset_class = TxtRecordFilterSet
+    filterset = TxtRecordFilterSet
+    filterset_form = forms.TxtRecordForm
 
 
 class TxtRecordView(generic.ObjectView):

@@ -13,7 +13,8 @@ class SrvRecordsListView(generic.ObjectListView):
     queryset = models.SrvRecord.objects.all()
     table = tables.SrvRecordTable
     action_buttons = ("add",)
-    filterset_class = SrvRecordFilterSet
+    filterset = SrvRecordFilterSet
+    filterset_form = forms.SrvRecordFilterForm
 
 
 class SrvRecordView(generic.ObjectView):

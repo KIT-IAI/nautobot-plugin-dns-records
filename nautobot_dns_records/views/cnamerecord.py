@@ -13,7 +13,8 @@ class CnameRecordsListView(generic.ObjectListView):
     queryset = models.CNameRecord.objects.all()
     table = tables.CNameRecordTable
     action_buttons = ("add",)
-    filterset_class = CNameRecordFilterSet
+    filterset = CNameRecordFilterSet
+    filterset_form = forms.CNameRecordFilterForm
 
 
 class CnameRecordView(generic.ObjectView):

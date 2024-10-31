@@ -13,7 +13,8 @@ class LocRecordsListView(generic.ObjectListView):
     queryset = models.LocRecord.objects.all()
     table = tables.LocRecordTable
     action_buttons = ("add",)
-    filterset_class = LocRecordFilterSet
+    filterset = LocRecordFilterSet
+    filterset_form = forms.LocRecordFilterForm
 
 
 class LocRecordView(generic.ObjectView):
