@@ -1,6 +1,6 @@
 """ Nautobot DNS-Records filters """
-from nautobot.apps.filters import BaseFilterSet, SearchFilter, MappedPredicatesFilterMixin
-from nautobot.extras.filters import NautobotFilterSet
+
+from nautobot.apps.filters import BaseFilterSet
 
 from nautobot_dns_records.models import (
     AddressRecord,

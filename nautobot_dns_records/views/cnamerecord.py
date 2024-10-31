@@ -14,7 +14,7 @@ class CnameRecordsListView(generic.ObjectListView):
     table = tables.CNameRecordTable
     action_buttons = ("add",)
     filterset = CNameRecordFilterSet
-    filterset_form = forms.CnameRecordFilterForm
+    filterset_form = forms.CNameRecordFilterForm
 
 
 class CnameRecordView(generic.ObjectView):

@@ -4,9 +4,8 @@ import nautobot.dcim.models
 import nautobot.ipam.models
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from nautobot.core.forms import TagFilterField
-from nautobot.extras.forms import RelationshipModelFormMixin, NautobotFilterForm, StatusModelFilterFormMixin
 from nautobot.apps.forms import BootstrapMixin, DynamicModelChoiceField
+from nautobot.extras.forms import RelationshipModelFormMixin, NautobotFilterForm, StatusModelFilterFormMixin
 
 from nautobot_dns_records import models
 
@@ -52,7 +51,7 @@ class CnameRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
         fields = ["label", "ttl", "target", "device", "status", "tags"]
 
 
-class CnameRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+class CNameRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
     """Filters for the CName Record list view."""
 
     model = models.CNameRecord
@@ -146,7 +145,7 @@ class SshfpRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelFor
 class SshfpRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
     """Filters for the SSHFP Record"""
 
-    model = models.PtrRecord
+    model = models.SshfpRecord
     field_order = ["q", "label__ic", "device", "fingerprint", "status"]
     q = forms.CharField(required=False, label=_("Search"))
     label__ic = forms.CharField(required=False, label=_("Label"))
@@ -167,7 +166,7 @@ class TxtRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
         fields = ["label", "ttl", "value", "device", "status", "tags"]
 
 
-class TxTRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
+class TxtRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
     """Filters for the TXT Record list view."""
 
     model = models.TxtRecord
