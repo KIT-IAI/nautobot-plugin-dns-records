@@ -37,6 +37,7 @@ jobs:
           - 6379:6379
     env:
       NAUTOBOT_CONFIG: "/home/runner/work/nautobot-plugin-dns-records/nautobot-plugin-dns-records/development/nautobot_config.py"
+      NAUTOBOT_REDIS_PASSWORD: "nautobot"
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v4
