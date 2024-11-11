@@ -68,7 +68,12 @@ class IPAddressExtensions(PluginTemplateExtension):
 
     def detail_tabs(self):
         """Add tabs to the IP address detail view."""
-        return []
+        return [
+            {
+                "title": "DNS Records",
+                "url": reverse("plugins:nautobot_dns_records:address_records_tab", kwargs={"pk": self.context["object"].pk}),
+            },
+        ]
 
     def buttons(self):
         """Add additional buttons to the IP address detail view."""
