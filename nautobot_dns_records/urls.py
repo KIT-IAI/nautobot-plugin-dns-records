@@ -11,7 +11,7 @@ from nautobot_dns_records.views import (
     sshfprecord,
     device_tab,
     srvrecord,
-    ipaddress_tab
+    ipaddress_tab,
 )
 
 urlpatterns = [

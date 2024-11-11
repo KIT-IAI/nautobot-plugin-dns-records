@@ -14,7 +14,9 @@ class DeviceExtensions(PluginTemplateExtension):
         return [
             {
                 "title": "DNS Records",
-                "url": reverse("plugins:nautobot_dns_records:device_records_tab", kwargs={"pk": self.context["object"].pk}),
+                "url": reverse(
+                    "plugins:nautobot_dns_records:device_records_tab", kwargs={"pk": self.context["object"].pk}
+                ),
             },
         ]
 
@@ -61,6 +63,7 @@ class DeviceExtensions(PluginTemplateExtension):
         """Add additional buttons to the buttons of the device detail view."""
         return ""
 
+
 class IPAddressExtensions(PluginTemplateExtension):
     """Extend the IP address detail view."""
 
@@ -71,7 +74,9 @@ class IPAddressExtensions(PluginTemplateExtension):
         return [
             {
                 "title": "DNS Records",
-                "url": reverse("plugins:nautobot_dns_records:address_records_tab", kwargs={"pk": self.context["object"].pk}),
+                "url": reverse(
+                    "plugins:nautobot_dns_records:address_records_tab", kwargs={"pk": self.context["object"].pk}
+                ),
             },
         ]
 
