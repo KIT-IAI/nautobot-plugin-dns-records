@@ -82,7 +82,20 @@ class IPAddressExtensions(PluginTemplateExtension):
 
     def buttons(self):
         """Add additional buttons to the IP address detail view."""
-        return ""
+        addressrecord_url = f"{reverse('plugins:nautobot_dns_records:addressrecord_add')}?address={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:address_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        ptrrecord_url = f"{reverse('plugins:nautobot_dns_records:ptrrecord_add')}?address={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:address_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        add_dns_records = (
+            '<div class="btn-group">'
+            '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+            '<span class="mdi mdi-plus-thick" aria-hidden="true"></span> Add DNS Records <span class="caret"></span>'
+            "</button>"
+            '<ul class="dropdown-menu">'
+            f'<li><a href="{addressrecord_url}">Address Record</a></li>'
+            f'<li><a href="{ptrrecord_url}">PTR Record</a></li>'
+            "</ul>"
+            "</div>"
+        )
+        return add_dns_records
 
     def full_width_page(self):
         """Add additional full width content to the IP address detail view."""
