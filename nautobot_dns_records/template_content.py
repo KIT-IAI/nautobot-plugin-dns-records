@@ -4,8 +4,8 @@ from django.urls import reverse
 from nautobot.extras.plugins import PluginTemplateExtension
 
 
-class DeviceExtraTabs(PluginTemplateExtension):
-    """Add extra device tabs."""
+class DeviceExtensions(PluginTemplateExtension):
+    """Extend the device detail view."""
 
     model = "dcim.device"
 
@@ -61,7 +61,37 @@ class DeviceExtraTabs(PluginTemplateExtension):
         """Add additional buttons to the buttons of the device detail view."""
         return ""
 
+class IPAddressExtensions(PluginTemplateExtension):
+    """Extend the IP address detail view."""
+
+    model = "ipam.ipaddress"
+
+    def detail_tabs(self):
+        """Add tabs to the IP address detail view."""
+        return []
+
+    def buttons(self):
+        """Add additional buttons to the IP address detail view."""
+        return ""
+
+    def full_width_page(self):
+        """Add additional full width content to the IP address detail view."""
+        return ""
+
+    def left_page(self):
+        """Add additional content to the left page of the IP address detail view."""
+        return ""
+
+    def right_page(self):
+        """Add additional content to the left page of the IP address detail view."""
+        return ""
+
+    def list_buttons(self):
+        """Add additional buttons to the buttons of the IP address detail view."""
+        return ""
+
 
 template_extensions = [
-    DeviceExtraTabs,
+    DeviceExtensions,
+    IPAddressExtensions,
 ]
