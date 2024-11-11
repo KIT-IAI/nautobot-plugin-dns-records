@@ -20,7 +20,30 @@ class DeviceExtraTabs(PluginTemplateExtension):
 
     def buttons(self):
         """Add additional buttons to the device detail view."""
-        return ""
+        addressrecord_url = f"{reverse('plugins:nautobot_dns_records:addressrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        txtrecord_url = f"{reverse('plugins:nautobot_dns_records:txtrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        locrecord_url = f"{reverse('plugins:nautobot_dns_records:locrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        cnamerecord_url = f"{reverse('plugins:nautobot_dns_records:cnamerecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        ptrrecord_url = f"{reverse('plugins:nautobot_dns_records:ptrrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        sshfprecord_url = f"{reverse('plugins:nautobot_dns_records:sshfprecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        srvrecord_url = f"{reverse('plugins:nautobot_dns_records:srvrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        add_dns_records = (
+            '<div class="btn-group">'
+            '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
+            '<span class="mdi mdi-plus-thick" aria-hidden="true"></span> Add DNS Records <span class="caret"></span>'
+            "</button>"
+            '<ul class="dropdown-menu">'
+            f'<li><a href="{addressrecord_url}">Address Record</a></li>'
+            f'<li><a href="{txtrecord_url}">TXT Record</a></li>'
+            f'<li><a href="{locrecord_url}">LOC Record</a></li>'
+            f'<li><a href="{cnamerecord_url}">CNAME Record</a></li>'
+            f'<li><a href="{ptrrecord_url}">PTR Record</a></li>'
+            f'<li><a href="{sshfprecord_url}">SSHFP Record</a></li>'
+            f'<li><a href="{srvrecord_url}">SRV Record</a></li>'
+            "</ul>"
+            "</div>"
+        )
+        return add_dns_records
 
     def full_width_page(self):
         """Add additional full width content to the device detail view."""
