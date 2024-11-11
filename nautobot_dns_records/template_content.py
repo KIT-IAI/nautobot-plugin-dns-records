@@ -14,19 +14,19 @@ class DeviceExtensions(PluginTemplateExtension):
         return [
             {
                 "title": "DNS Records",
-                "url": reverse("plugins:nautobot_dns_records:device_records", kwargs={"pk": self.context["object"].pk}),
+                "url": reverse("plugins:nautobot_dns_records:device_records_tab", kwargs={"pk": self.context["object"].pk}),
             },
         ]
 
     def buttons(self):
         """Add additional buttons to the device detail view."""
-        addressrecord_url = f"{reverse('plugins:nautobot_dns_records:addressrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        txtrecord_url = f"{reverse('plugins:nautobot_dns_records:txtrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        locrecord_url = f"{reverse('plugins:nautobot_dns_records:locrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        cnamerecord_url = f"{reverse('plugins:nautobot_dns_records:cnamerecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        ptrrecord_url = f"{reverse('plugins:nautobot_dns_records:ptrrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        sshfprecord_url = f"{reverse('plugins:nautobot_dns_records:sshfprecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
-        srvrecord_url = f"{reverse('plugins:nautobot_dns_records:srvrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        addressrecord_url = f"{reverse('plugins:nautobot_dns_records:addressrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        txtrecord_url = f"{reverse('plugins:nautobot_dns_records:txtrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        locrecord_url = f"{reverse('plugins:nautobot_dns_records:locrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        cnamerecord_url = f"{reverse('plugins:nautobot_dns_records:cnamerecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        ptrrecord_url = f"{reverse('plugins:nautobot_dns_records:ptrrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        sshfprecord_url = f"{reverse('plugins:nautobot_dns_records:sshfprecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
+        srvrecord_url = f"{reverse('plugins:nautobot_dns_records:srvrecord_add')}?device={self.context['object'].pk}&return_url={reverse('plugins:nautobot_dns_records:device_records_tab', kwargs={'pk': self.context['object'].pk})}?tab=nautobot_dns_records:1"
         add_dns_records = (
             '<div class="btn-group">'
             '<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'
