@@ -3,7 +3,7 @@
 
 from nautobot.apps.api import NautobotModelSerializer
 
-from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
+from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord, SrvRecord
 
 
 class AddressRecordSerializer(NautobotModelSerializer):
@@ -47,3 +47,10 @@ class SshfpRecordSerializer(NautobotModelSerializer):
     class Meta:
         model = SshfpRecord
         fields = ("label", "ttl", "device", "algorithm", "hashType", "fingerprint","status")
+
+class SrvRecordSerializer(NautobotModelSerializer):
+    """API serializer for interacting with SrvRecord objects."""
+
+    class Meta:
+        model = SrvRecord
+        fields = ("label", "ttl", "device", "priority", "weight", "port", "target", "status")

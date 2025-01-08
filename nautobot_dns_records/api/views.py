@@ -2,8 +2,8 @@
 """API views for nautobot_dns_records."""
 from nautobot.apps.api import NautobotModelViewSet
 
-from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord
-from nautobot_dns_records.api.serializers import AddressRecordSerializer, CNameRecordSerializer, TxtRecordSerializer, LocRecordSerializer, PtrRecordSerializer, SshfpRecordSerializer
+from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord, SrvRecord
+from nautobot_dns_records.api.serializers import AddressRecordSerializer, CNameRecordSerializer, TxtRecordSerializer, LocRecordSerializer, PtrRecordSerializer, SshfpRecordSerializer, SrvRecordSerializer
 
 
 class AddressRecordViewSet(NautobotModelViewSet):
@@ -42,3 +42,9 @@ class SshfpRecordViewSet(NautobotModelViewSet):
 
     queryset = SshfpRecord.objects.all()
     serializer_class = SshfpRecordSerializer
+
+class SrvRecordViewSet(NautobotModelViewSet):
+    """API viewset for interacting with SrvRecord objects."""
+
+    queryset = SrvRecord.objects.all()
+    serializer_class = SrvRecordSerializer
