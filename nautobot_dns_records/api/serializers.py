@@ -3,7 +3,15 @@
 
 from nautobot.apps.api import NautobotModelSerializer
 
-from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord, LocRecord, PtrRecord, SshfpRecord, SrvRecord
+from nautobot_dns_records.models import (
+    AddressRecord,
+    CNameRecord,
+    TxtRecord,
+    LocRecord,
+    PtrRecord,
+    SshfpRecord,
+    SrvRecord,
+)
 
 
 class AddressRecordSerializer(NautobotModelSerializer):
@@ -13,12 +21,14 @@ class AddressRecordSerializer(NautobotModelSerializer):
         model = AddressRecord
         fields = ("label", "ttl", "device", "address", "status")
 
+
 class CNameRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with CNameRecord objects."""
 
     class Meta:
         model = CNameRecord
         fields = ("label", "ttl", "device", "target", "status")
+
 
 class TxtRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with TxtRecord objects."""
@@ -27,12 +37,29 @@ class TxtRecordSerializer(NautobotModelSerializer):
         model = TxtRecord
         fields = ("label", "ttl", "device", "value", "status")
 
+
 class LocRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with LocRecord objects."""
 
     class Meta:
         model = LocRecord
-        fields = ("label", "ttl", "device", "status", "degLat", "degLong", "minLat", "minLong", "secLat", "secLong", "altitude", "precision", "dirLat", "dirLong")
+        fields = (
+            "label",
+            "ttl",
+            "device",
+            "status",
+            "degLat",
+            "degLong",
+            "minLat",
+            "minLong",
+            "secLat",
+            "secLong",
+            "altitude",
+            "precision",
+            "dirLat",
+            "dirLong",
+        )
+
 
 class PtrRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with PtrRecord objects."""
@@ -41,12 +68,14 @@ class PtrRecordSerializer(NautobotModelSerializer):
         model = PtrRecord
         fields = ("label", "ttl", "device", "address", "status")
 
+
 class SshfpRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with SshfpRecord objects."""
 
     class Meta:
         model = SshfpRecord
-        fields = ("label", "ttl", "device", "algorithm", "hashType", "fingerprint","status")
+        fields = ("label", "ttl", "device", "algorithm", "hashType", "fingerprint", "status")
+
 
 class SrvRecordSerializer(NautobotModelSerializer):
     """API serializer for interacting with SrvRecord objects."""
