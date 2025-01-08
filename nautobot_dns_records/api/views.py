@@ -2,8 +2,8 @@
 """API views for nautobot_dns_records."""
 from nautobot.apps.api import NautobotModelViewSet
 
-from nautobot_dns_records.models import AddressRecord, CNameRecord
-from nautobot_dns_records.api.serializers import AddressRecordSerializer, CNameRecordSerializer
+from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord
+from nautobot_dns_records.api.serializers import AddressRecordSerializer, CNameRecordSerializer, TxtRecordSerializer
 
 
 class AddressRecordViewSet(NautobotModelViewSet):
@@ -18,3 +18,9 @@ class CNameRecordViewSet(NautobotModelViewSet):
 
     queryset = CNameRecord.objects.all()
     serializer_class = CNameRecordSerializer
+
+class TxtRecordViewSet(NautobotModelViewSet):
+    """API viewset for interacting with TxtRecord objects."""
+
+    queryset = TxtRecord.objects.all()
+    serializer_class = TxtRecordSerializer

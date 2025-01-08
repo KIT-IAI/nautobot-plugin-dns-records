@@ -3,7 +3,7 @@
 
 from nautobot.apps.api import NautobotModelSerializer
 
-from nautobot_dns_records.models import AddressRecord, CNameRecord
+from nautobot_dns_records.models import AddressRecord, CNameRecord, TxtRecord
 
 
 class AddressRecordSerializer(NautobotModelSerializer):
@@ -19,3 +19,10 @@ class CNameRecordSerializer(NautobotModelSerializer):
     class Meta:
         model = CNameRecord
         fields = ("label", "ttl", "device", "target", "status")
+
+class TxtRecordSerializer(NautobotModelSerializer):
+    """API serializer for interacting with TxtRecord objects."""
+
+    class Meta:
+        model = TxtRecord
+        fields = ("label", "ttl", "device", "value", "status")
