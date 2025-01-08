@@ -6,16 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('nautobot_dns_records', '0003_constraints'),
+        ("nautobot_dns_records", "0003_constraints"),
     ]
 
     operations = [
         migrations.AddConstraint(
-            model_name='srvrecord',
-            constraint=models.UniqueConstraint(fields=('label', 'target', 'port'), name='srv_unique_label_target_port'),
+            model_name="srvrecord",
+            constraint=models.UniqueConstraint(fields=("label", "target", "port"), name="srv_unique_label_target_port"),
         ),
         migrations.AddConstraint(
-            model_name='sshfprecord',
-            constraint=models.UniqueConstraint(fields=('label', 'fingerprint'), name='sshfp_unique_label_fingerprint'),
+            model_name="sshfprecord",
+            constraint=models.UniqueConstraint(fields=("label", "fingerprint"), name="sshfp_unique_label_fingerprint"),
         ),
     ]
