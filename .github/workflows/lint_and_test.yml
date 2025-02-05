@@ -1,4 +1,4 @@
-name: Lint the projects files
+name: Lint and test the projects
 on:
   - push
   - pull_request
@@ -10,6 +10,31 @@ jobs:
   PythonLinting:
     name: Python linting
     runs-on: ubuntu-latest
+    env:
+      NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_config.py"
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: 'poetry'
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.3.2
+      - name: Install all dependencies
+        run: poetry install
+      - name: Run black (check mode)
+        run: poetry run black --check nautobot_dns_records
+      - name: Run pylint
+        run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
+      - name: Run pydocstyle
+        run: poetry run pydocstyle nautobot_dns_records
+  Unittests:
+    name: Unittests
+    runs-on: ubuntu-latest
+    needs:
+      - PythonLinting
     services:
       postgres:
         image: postgres
@@ -37,21 +62,16 @@ jobs:
       NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_config.py"
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+          cache: 'poetry'
       - name: Run image
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: 1.3.2
       - name: Install all dependencies
         run: poetry install
-      - name: Run black (check mode)
-        run: poetry run black --check nautobot_dns_records
-      - name: Run pylint
-        run: poetry run pylint --init-hook "import nautobot; nautobot.setup()" --rcfile pyproject.toml nautobot_dns_records
-      - name: Run pydocstyle
-        run: poetry run pydocstyle nautobot_dns_records
       - name: Run the tests with coverage
         run: poetry run coverage run development/manage.py -c development/nautobot_config.py test
       - name: Report coverage
