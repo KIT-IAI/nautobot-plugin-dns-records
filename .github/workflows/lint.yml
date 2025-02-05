@@ -34,7 +34,7 @@ jobs:
         ports:
           - 6379:6379
     env:
-      NAUTOBOT_CONFIG: "/home/runner/work/nautobot-plugin-dns-records/nautobot-plugin-dns-records/development/nautobot_config.py"
+      NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_config.py"
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v4
