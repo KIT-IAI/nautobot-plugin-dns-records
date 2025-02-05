@@ -1,3 +1,4 @@
+# pylint: disable=too-many-ancestors
 """Model definition for nautobot_dns_records."""
 
 import codecs
