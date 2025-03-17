@@ -13,4 +13,4 @@ jobs:
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           poetry_install_options: "--without dev"
-          python_version: "3.12"
+          python_version: "3.11"
