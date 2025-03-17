@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nautobot-dns-records"
-version = "0.2.0"
+version = "0.3.0"
 description = "Manage DNS Records in Nautobot"
 authors = ["Daniel Bacher <bacher@kit.edu>"]
 license = "Apache-2.0"
