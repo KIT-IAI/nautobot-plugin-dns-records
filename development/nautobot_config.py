@@ -22,7 +22,7 @@ ALLOWED_HOSTS = []
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": parse_redis_connection(redis_database=1),
+        "LOCATION": "redis://:nautobot@localhost:6379/1",
         "TIMEOUT": 300,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient", "PASSWORD": "nautobot"},
     }
@@ -33,7 +33,7 @@ CONTENT_TYPE_CACHE_TIMEOUT = "0"
 
 # Celery broker URL used to tell workers where queues are located
 #
-CELERY_BROKER_URL = parse_redis_connection(redis_database=0)
+CELERY_BROKER_URL = "redis://:nautobot@localhost:6379/0"
 
 # Database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
