@@ -57,20 +57,17 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
-      redis:
-        image: redis
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          --entrypoint "sh -c redis-server --appendonly yes --requirepass nautobot"
-        ports:
-          - 6379:6379
     env:
       NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_config.py"
     steps:
       - uses: actions/checkout@master
+      - name: Setup redis
+        uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: latest
+          auto-start: "true"
+          redis-conf: |
+            requirepass nautobot
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
