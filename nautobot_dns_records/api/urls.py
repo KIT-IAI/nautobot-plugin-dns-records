@@ -12,11 +12,11 @@ from nautobot_dns_records.api.views import (
 )
 
 router = routers.DefaultRouter()
-router.register("address-records", AddressRecordViewSet, basename="address-records")
-router.register("cname-records", CNameRecordViewSet, basename="cname-records")
-router.register("txt-records", TxtRecordViewSet, basename="txt-records")
-router.register("loc-records", LocRecordViewSet, basename="loc-records")
-router.register("ptr-records", PtrRecordViewSet, basename="ptr-records")
-router.register("sshfp-records", SshfpRecordViewSet, basename="sshfp-records")
-router.register("srv-records", SrvRecordViewSet, basename="srv-records")
+router.register("address-records", AddressRecordViewSet, basename="addressrecord")
+router.register("cname-records", CNameRecordViewSet, basename="cnamerecord")
+router.register("txt-records", TxtRecordViewSet, basename="txtrecord")
+router.register("loc-records", LocRecordViewSet, basename="locrecord")
+router.register("ptr-records", PtrRecordViewSet, basename="ptrrecord")
+router.register("sshfp-records", SshfpRecordViewSet, basename="sshfprecord")
+router.register("srv-records", SrvRecordViewSet, basename="srvrecord")
 urlpatterns = router.urls
