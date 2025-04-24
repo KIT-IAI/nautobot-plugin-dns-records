@@ -1,7 +1,9 @@
 """nautobot_dns_records Plugin Initilization."""
+from importlib import metadata
 
 from nautobot.apps import NautobotAppConfig
 
+__version__ = metadata.version(__name__)
 
 class NautobotDnsRecordsConfig(NautobotAppConfig):
     """Plugin configuration for the nautobot_dns_records plugin."""
@@ -16,7 +18,7 @@ class NautobotDnsRecordsConfig(NautobotAppConfig):
     caching_config = {}  # Plugin-specific cache configuration.
     author = "Daniel Bacher"
     author_email = "bacher@kit.edu"
-    version = "0.2.0"
+    version = __version__
     description = "This plugin allows to manage DNS records in Nautobot"
 
     searchable_models = [
