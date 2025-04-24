@@ -109,21 +109,26 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
     address = DynamicModelChoiceField(
         queryset=nautobot.ipam.models.IPAddress.objects.all(), query_params={"device_id": "$device"}
     )
+    record = DynamicModelChoiceField(queryset=models.AddressRecord.objects.all())
 
     class Meta:
         model = models.PtrRecord
-        fields = ["label", "ttl", "device", "address", "status", "tags"]
+        fields = ["record", "ttl", "device", "address", "record", "status", "tags"]
 
 
 class PtrRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):
     """Filters for the PTR Record list view."""
 
     model = models.PtrRecord
-    field_order = ["q", "label__ic", "device", "address", "status"]
+    field_order = ["q", "label__ic", "device", "address", "record", "status"]
     q = forms.CharField(required=False, label=_("Search"))
     label__ic = forms.CharField(required=False, label=_("Label"))
     device = DynamicModelChoiceField(
         queryset=nautobot.dcim.models.Device.objects.all(),
+        required=False,
+    )
+    record = DynamicModelChoiceField(
+        queryset=models.AddressRecord.objects.all(),
         required=False,
     )
     address = DynamicModelChoiceField(
