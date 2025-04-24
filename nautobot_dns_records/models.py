@@ -2,6 +2,7 @@
 """Model definition for nautobot_dns_records."""
 
 import codecs
+import ipaddress
 
 import nautobot.dcim.models
 import nautobot.ipam.models
@@ -237,7 +238,7 @@ class LocRecord(PrimaryModel, Record):
 
 
 @extras_features("custom_fields", "graphql", "statuses")
-class PtrRecord(PrimaryModel, Record):
+class PtrRecord(PrimaryModel):
     """Class that represents a PTR record.
 
     Attributes:
@@ -250,13 +251,38 @@ class PtrRecord(PrimaryModel, Record):
         verbose_name=_("IP Address"),
         help_text=_("Related IP Address for the record."),
     )
+    record = models.ForeignKey(
+        AddressRecord,
+        on_delete=models.CASCADE,
+        verbose_name=_("Address Record"),
+        help_text=_("Related Address Record."),
+    )
     status = StatusField(
         on_delete=models.PROTECT,
         related_name="%(app_label)s_%(class)s_related",
     )
 
+    ttl = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(604800)],
+        verbose_name=_("TTL"),
+        help_text=_("Time to live for the dns entry in seconds, valid values are in the range 1 - 604800."),
+        default=3600,
+    )
+    device = models.ForeignKey(
+        nautobot.dcim.models.Device, on_delete=models.CASCADE, null=True, blank=True, verbose_name=_("Device")
+    )
+
+    @property
+    def label(self):
+        """Returns the ip reverse pointer."""
+        return ipaddress.ip_address(self.address.host).reverse_pointer
+
+    def __str__(self):
+        """Return the label field."""
+        return self.label
+
     class Meta:
-        constraints = [UniqueConstraint(fields=["label", "address"], name="ptr_unique_label_address")]
+        constraints = [UniqueConstraint(fields=["address", "record"], name="ptr_unique_address_record")]
 
 
 @extras_features(

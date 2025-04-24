@@ -54,7 +54,7 @@ class PtrRecordFilterSet(BaseFilterSet):
 
     class Meta:
         model = PtrRecord
-        fields = ["label", "address"]
+        fields = ["address", "record"]
 
 
 class SshfpRecordFilterSet(BaseFilterSet):

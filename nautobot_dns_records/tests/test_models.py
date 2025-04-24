@@ -1,5 +1,7 @@
 """Tests for the nautobot_dns_records models."""
 
+import ipaddress
+
 import django.db.models.fields
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
@@ -419,26 +421,34 @@ class PtrRecordTestCase(TestCase):
         self.testIPv4 = IPAddress.objects.filter(ip_version="4").first()
         self.testIPv6 = IPAddress.objects.filter(ip_version="6").first()
         self.status = Status.objects.get(name="Active")
+        self.testRecord = AddressRecord.objects.create(
+            label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
+        )
 
     def test_ptr_record_creation_ipv4(self):
         record = PtrRecord(
-            label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status
+            ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status, record=self.testRecord
         )
         record.save()
         self.assertEqual(record.address, self.testIPv4)
+        self.assertEqual(record.label, ipaddress.ip_address(self.testIPv4.host).reverse_pointer)
 
     def test_ptr_record_creation_ipv6(self):
         record = PtrRecord(
-            label=random_valid_dns_name(), ttl=random_valid_dns_ttl(), address=self.testIPv6, status=self.status
+            ttl=random_valid_dns_ttl(), address=self.testIPv6, status=self.status, record=self.testRecord
         )
         record.save()
         self.assertEqual(record.address, self.testIPv6)
+        self.assertEqual(record.label, ipaddress.ip_address(self.testIPv6.host).reverse_pointer)
 
     def test_ptr_record_uniqueness(self):
-        label = random_valid_dns_name()
         with self.assertRaisesRegex(IntegrityError, "duplicate key value violates unique constraint .*"):
-            PtrRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
-            PtrRecord(label=label, ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status).save()
+            PtrRecord(
+                ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status, record=self.testRecord
+            ).save()
+            PtrRecord(
+                ttl=random_valid_dns_ttl(), address=self.testIPv4, status=self.status, record=self.testRecord
+            ).save()
 
 
 class SshfpRecordTestCase(TestCase):

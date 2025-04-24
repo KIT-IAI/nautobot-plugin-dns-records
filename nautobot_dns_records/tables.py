@@ -65,12 +65,13 @@ class PtrRecordTable(StatusTableMixin, BaseTable):
 
     pk = ToggleColumn()
     label = tables.Column(linkify=True)
+    record = tables.Column(linkify=True)
     address = tables.Column(linkify=True)
     actions = ButtonsColumn(models.PtrRecord, buttons=("edit", "delete"))
 
     class Meta(BaseTable.Meta):
         model = models.PtrRecord
-        fields = ("pk", "label", "address")
+        fields = ("pk", "label", "record", "address")
 
 
 class SshfpRecordTable(StatusTableMixin, BaseTable):
