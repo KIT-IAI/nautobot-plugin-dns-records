@@ -58,7 +58,7 @@ jobs:
         ports:
           - 5432:5432
     env:
-      NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_config.py"
+      NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_test_config.py"
     steps:
       - uses: actions/checkout@v4
       - name: Setup redis
@@ -87,6 +87,6 @@ jobs:
       - name: Install all dependencies
         run: poetry install
       - name: Run the tests with coverage
-        run: poetry run coverage run development/manage.py -c development/nautobot_config.py test
+        run: poetry run coverage run development/manage.py -c development/nautobot_test_config.py test
       - name: Report coverage
         run: poetry run coverage report
