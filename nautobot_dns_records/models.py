@@ -55,7 +55,7 @@ class Record(models.Model):
         Encodes the label field with the IDNA2003 rules
         """
         self.label = codecs.encode(self.label, encoding="idna").decode()
-        super().save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         """Return the label field."""
@@ -117,7 +117,7 @@ class CNameRecord(PrimaryModel, Record):
         Encodes the target field with the IDNA2003 rules
         """
         self.target = codecs.encode(self.target, encoding="idna").decode()
-        super().save()
+        super().save(*args, **kwargs)
 
     class Meta:
         constraints = [UniqueConstraint(fields=["label"], name="unique_label")]

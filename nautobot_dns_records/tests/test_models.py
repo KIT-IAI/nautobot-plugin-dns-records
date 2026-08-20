@@ -44,9 +44,25 @@ class RecordTestCase(AbstractModelMixinTestCase):
         self.assertIsInstance(Record._meta.get_field("label"), django.db.models.fields.CharField)
 
     def test_record_single_label_to_long(self):
-        label = "thisisaveryveryveryverylongdnslabelwhichisinvalid12345678942424"
+        label = "a" * 64
         with self.assertRaisesMessage(ValidationError, f"The label {label} is longer than allowed (> 63)"):
             record = self.model(label=f"{label}.test", ttl=1)
+            record.clean_fields()
+
+    def test_record_single_label_exactly_63_chars(self):
+        label = "a" * 63
+        record = self.model(label=label, ttl=1)
+        record.clean_fields()
+
+    def test_record_single_label_too_long(self):
+        label = "a" * 64
+        with self.assertRaisesMessage(ValidationError, f"The label {label} is longer than allowed (> 63)"):
+            record = self.model(label=label, ttl=1)
+            record.clean_fields()
+
+    def test_record_empty_label_is_rejected(self):
+        with self.assertRaisesMessage(ValidationError, "DNS names may not contain empty labels."):
+            record = self.model(label="foo..bar", ttl=1)
             record.clean_fields()
 
     def test_record_to_long(self):
@@ -132,6 +148,41 @@ class CNameRecordTestCase(TestCase):
         )
         record.save()
         self.assertEqual(record.target, "xn--ls8h.test")
+
+    def test_save_forwards_kwargs(self):
+        old_label = random_valid_dns_name()
+        record = CNameRecord(
+            label=old_label,
+            ttl=random_valid_dns_ttl(),
+            target=random_valid_dns_name(),
+            status=self.status,
+        )
+        record.save()
+
+        record.label = "💩.test"
+        new_ttl = random_valid_dns_ttl()
+        record.ttl = new_ttl
+        record.save(update_fields=["ttl"])
+
+        record.refresh_from_db()
+        self.assertEqual(record.label, old_label)
+        self.assertEqual(record.ttl, new_ttl)
+
+    def test_save_force_update(self):
+        record = CNameRecord(
+            label=random_valid_dns_name(),
+            ttl=random_valid_dns_ttl(),
+            target=random_valid_dns_name(),
+            status=self.status,
+        )
+        record.save()
+
+        new_target = random_valid_dns_name()
+        record.target = new_target
+        record.save(force_update=True)
+
+        record.refresh_from_db()
+        self.assertEqual(record.target, new_target)
 
     def test_record_uniqueness(self):
         target = random_valid_dns_name()
