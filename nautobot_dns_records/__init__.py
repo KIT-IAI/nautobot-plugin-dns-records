@@ -1,9 +1,11 @@
 """nautobot_dns_records Plugin Initilization."""
+
 from importlib import metadata
 
 from nautobot.apps import NautobotAppConfig
 
 __version__ = metadata.version(__name__)
+
 
 class NautobotDnsRecordsConfig(NautobotAppConfig):
     """Plugin configuration for the nautobot_dns_records plugin."""
@@ -12,7 +14,7 @@ class NautobotDnsRecordsConfig(NautobotAppConfig):
     verbose_name = "DNS Records"  # Human-friendly name for the plugin.
     base_url = "dns"  # (Optional) Base path to use for plugin URLs. Defaulting to app_name.
     required_settings = []  # A list of any configuration parameters that must be defined by the user.
-    min_version = "2.0.0"  # Minimum version of Nautobot with which the plugin is compatible.
+    min_version = "3.2.3"  # Minimum version of Nautobot with which the plugin is compatible.
     # max_version = "1.4.0"  # Maximum version of Nautobot with which the plugin is compatible.
     default_settings = {}  # A dictionary of configuration parameters and their default values.
     caching_config = {}  # Plugin-specific cache configuration.

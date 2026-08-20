@@ -10,7 +10,7 @@ packages = [
 readme = "readme.md"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
+python = ">=3.10,<3.15"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
@@ -33,7 +33,7 @@ pylint-django = "*"
 yamllint = "*"
 Markdown = "*"
 Faker = "*"
-nautobot = "~2.4"
+nautobot = "^3.2.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -41,7 +41,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
-target-version = ['py37']
+target-version = ['py310']
 include = '\.pyi?$'
 exclude = '''
 (
@@ -93,7 +93,7 @@ max-parents = 10
 
 [tool.pylint-nautobot]
 supported_nautobot_versions = [
-    "2"
+    "3"
 ]
 
 [tool.pydocstyle]

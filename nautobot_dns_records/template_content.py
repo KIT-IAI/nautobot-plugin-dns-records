@@ -1,10 +1,10 @@
 """Modifies build in nautobot templates."""
 
 from django.urls import reverse
-from nautobot.extras.plugins import PluginTemplateExtension
+from nautobot.apps.ui import TemplateExtension
 
 
-class DeviceExtensions(PluginTemplateExtension):
+class DeviceExtensions(TemplateExtension):
     """Extend the device detail view."""
 
     model = "dcim.device"
@@ -64,7 +64,7 @@ class DeviceExtensions(PluginTemplateExtension):
         return ""
 
 
-class IPAddressExtensions(PluginTemplateExtension):
+class IPAddressExtensions(TemplateExtension):
     """Extend the IP address detail view."""
 
     model = "ipam.ipaddress"
