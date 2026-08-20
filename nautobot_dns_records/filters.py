@@ -16,7 +16,7 @@ from nautobot_dns_records.models import (
 class AddressRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Address records."""
 
-    q = SearchFilter(filter_predicates={"label": "icontains", "address__address": "icontains"})
+    q = SearchFilter(filter_predicates={"label": "icontains", "address__dns_name": "icontains"})
 
     class Meta:
         model = AddressRecord
@@ -62,7 +62,7 @@ class PtrRecordFilterSet(BaseFilterSet):
 
     q = SearchFilter(
         filter_predicates={
-            "address__address": "icontains",
+            "address__dns_name": "icontains",
             "record__label": "icontains",
         }
     )
