@@ -113,7 +113,7 @@ class PtrRecordForm(BootstrapMixin, RelationshipModelFormMixin, forms.ModelForm)
 
     class Meta:
         model = models.PtrRecord
-        fields = ["record", "ttl", "device", "address", "record", "status", "tags"]
+        fields = ["ttl", "device", "address", "record", "status", "tags"]
 
 
 class PtrRecordFilterForm(NautobotFilterForm, StatusModelFilterFormMixin):

@@ -22,7 +22,7 @@ ALLOWED_HOSTS = []
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:nautobot@localhost:6379/1",
+        "LOCATION": f"redis://:nautobot@localhost:{os.getenv('NAUTOBOT_REDIS_PORT', '6380')}/1",
         "TIMEOUT": 300,
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient", "PASSWORD": "nautobot"},
     }
@@ -33,7 +33,7 @@ CONTENT_TYPE_CACHE_TIMEOUT = "0"
 
 # Celery broker URL used to tell workers where queues are located
 #
-CELERY_BROKER_URL = "redis://:nautobot@localhost:6379/0"
+CELERY_BROKER_URL = f"redis://:nautobot@localhost:{os.getenv('NAUTOBOT_REDIS_PORT', '6380')}/0"
 
 # Database configuration. See the Django documentation for a complete list of available parameters:
 #   https://docs.djangoproject.com/en/stable/ref/settings/#databases
@@ -44,7 +44,7 @@ DATABASES = {
         "USER": "nautobot",  # Database username
         "PASSWORD": "nautobot",  # Database password
         "HOST": "localhost",  # Database server
-        "PORT": "",  # Database port (leave blank for default)
+        "PORT": os.getenv("NAUTOBOT_POSTGRES_PORT", "5433"),  # Database port
         "CONN_MAX_AGE": 300,  # Database timeout
         "ENGINE": "django.db.backends.postgresql",  # Database driver ("mysql" or "postgresql")
     }

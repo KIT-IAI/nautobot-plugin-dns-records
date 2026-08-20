@@ -12,20 +12,20 @@ The following record types are actually supported:
 
 ## Development
 
-The Development Environment uses docker for the auxiliary containers and a virtual environment for the python dependencies.
+The development environment uses Docker for the auxiliary containers and Poetry for Python dependencies.
 
 The following requirements are needed for a setup:
 * docker
-* docker-compose
+* Docker Compose
 * poetry
-* python 3.7
+* Python 3.11
 
 * Setup steps:
-1. `poetry install`
-2. `docker-compose up -f development/docker-compose.yml`
-3. `poetry shell`
-4. `python development/manage.py -c development/nautobot_config.py migrate`
-5. `python development/manage.py -c development/nautobot_config.py runserver`
+1. `poetry env use python3.11`
+2. `poetry install`
+3. `docker compose -f development/docker-compose.yml up -d`
+4. `poetry run python development/manage.py -c development/nautobot_config.py migrate`
+5. `poetry run python development/manage.py -c development/nautobot_config.py runserver`
 
 ## Setup
 

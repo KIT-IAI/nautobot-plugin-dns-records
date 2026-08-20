@@ -17,7 +17,7 @@
       {% render_table addressrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_addressrecord %}
+        {% if perms.nautobot_dns_records.add_addressrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:addressrecord_add' %}?address={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:address_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -41,7 +41,7 @@
       {% render_table ptrrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_ptrrecord %}
+        {% if perms.nautobot_dns_records.add_ptrrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:ptrrecord_add' %}?address={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:address_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"

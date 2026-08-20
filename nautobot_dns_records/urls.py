@@ -34,7 +34,7 @@ urlpatterns = [
     path("loc_record/add/", locrecord.LocRecordEditView.as_view(), name="locrecord_add"),
     path("loc_record/<uuid:pk>/", locrecord.LocRecordView.as_view(), name="locrecord"),
     path("loc_record/<uuid:pk>/edit/", locrecord.LocRecordEditView.as_view(), name="locrecord_edit"),
-    path("loc_record/<uuid:pk>/delet/", locrecord.LocRecordDeleteView.as_view(), name="locrecord_delete"),
+    path("loc_record/<uuid:pk>/delete/", locrecord.LocRecordDeleteView.as_view(), name="locrecord_delete"),
     # CNAME Record
     path("cname_record/", cnamerecord.CnameRecordsListView.as_view(), name="cnamerecord_list"),
     path("cname_record/add/", cnamerecord.CnameRecordEditView.as_view(), name="cnamerecord_add"),
@@ -55,10 +55,10 @@ urlpatterns = [
     path("sshfp_record/<uuid:pk>/delete/", sshfprecord.SshfpRecordDeleteView.as_view(), name="sshfprecord_delete"),
     # SRV Record
     path("srv_record/", srvrecord.SrvRecordsListView.as_view(), name="srvrecord_list"),
-    path("srvfp_record/add/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_add"),
-    path("srvfp_record/<uuid:pk>/", srvrecord.SrvRecordView.as_view(), name="srvrecord"),
-    path("srvfp_record/<uuid:pk>/edit/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_edit"),
-    path("srvfp_record/<uuid:pk>/delete/", srvrecord.SrvRecordDeleteView.as_view(), name="srvrecord_delete"),
+    path("srv_record/add/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_add"),
+    path("srv_record/<uuid:pk>/", srvrecord.SrvRecordView.as_view(), name="srvrecord"),
+    path("srv_record/<uuid:pk>/edit/", srvrecord.SrvRecordEditView.as_view(), name="srvrecord_edit"),
+    path("srv_record/<uuid:pk>/delete/", srvrecord.SrvRecordDeleteView.as_view(), name="srvrecord_delete"),
     # Custom Tabs
     path("devices/<uuid:pk>/records/", device_tab.DeviceRecordsTab.as_view(), name="device_records_tab"),
     path("ip-addresses/<uuid:pk>/records/", ipaddress_tab.IpAddressRecordsTab.as_view(), name="address_records_tab"),

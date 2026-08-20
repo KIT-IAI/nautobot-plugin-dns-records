@@ -1,6 +1,4 @@
 ---
-version: "3.8"
-
 services:
   db:
     image: "postgres:13-alpine"
@@ -12,7 +10,7 @@ services:
       timeout: "5s"
       retries: 10
     ports:
-      - "5432:5432"
+      - "5433:5432"
     #command: ["postgres", "-c", "log_statement=all"]
     environment:
       POSTGRES_USER: nautobot
@@ -25,6 +23,6 @@ services:
       - "-c"
       - "redis-server --appendonly yes --requirepass nautobot"
     ports:
-      - "6379:6379"
+      - "6380:6379"
 volumes:
   postgres_data: {}

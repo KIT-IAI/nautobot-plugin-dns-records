@@ -17,7 +17,7 @@
       {% render_table addressrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_addressrecord %}
+        {% if perms.nautobot_dns_records.add_addressrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:addressrecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -41,7 +41,7 @@
       {% render_table ptrrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_ptrrecord %}
+        {% if perms.nautobot_dns_records.add_ptrrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:ptrrecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -65,7 +65,7 @@
       {% render_table txtrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_txtrecord %}
+        {% if perms.nautobot_dns_records.add_txtrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:txtrecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -89,7 +89,7 @@
       {% render_table cnamerecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_cnamerecord %}
+        {% if perms.nautobot_dns_records.add_cnamerecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:cnamerecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -113,7 +113,7 @@
       {% render_table locrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_locrecord %}
+        {% if perms.nautobot_dns_records.add_locrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:locrecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -137,7 +137,7 @@
       {% render_table sshfprecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_sshfprecord %}
+        {% if perms.nautobot_dns_records.add_sshfprecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:sshfprecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
@@ -161,7 +161,7 @@
       {% render_table srvrecords_table 'inc/table.html' %}
 
       <div class="panel-footer noprint">
-        {% if perms.nautbot_dns.add_srvrecord %}
+        {% if perms.nautobot_dns_records.add_srvrecord %}
           <div class="pull-right">
             <a
               href="{% url 'plugins:nautobot_dns_records:srvrecord_add' %}?device={{ object.pk }}&return_url={% url 'plugins:nautobot_dns_records:device_records_tab' pk=object.pk %}?tab=nautobot_dns_records:1"
