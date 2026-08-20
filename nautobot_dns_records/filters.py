@@ -1,6 +1,6 @@
 """Nautobot DNS-Records filters."""
 
-from nautobot.apps.filters import BaseFilterSet
+from nautobot.apps.filters import BaseFilterSet, SearchFilter
 
 from nautobot_dns_records.models import (
     AddressRecord,
@@ -16,6 +16,8 @@ from nautobot_dns_records.models import (
 class AddressRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Address records."""
 
+    q = SearchFilter(filter_predicates={"label": "icontains", "address__address": "icontains"})
+
     class Meta:
         model = AddressRecord
         fields = ["label", "address", "device"]
@@ -24,6 +26,8 @@ class AddressRecordFilterSet(BaseFilterSet):
 class CNameRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of CName records."""
 
+    q = SearchFilter(filter_predicates={"label": "icontains", "target": "icontains"})
+
     class Meta:
         model = CNameRecord
         fields = ["label", "target"]
@@ -31,6 +35,8 @@ class CNameRecordFilterSet(BaseFilterSet):
 
 class TxtRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Txt records."""
+
+    q = SearchFilter(filter_predicates={"label": "icontains", "value": "icontains"})
 
     class Meta:
         model = TxtRecord
@@ -42,6 +48,8 @@ class TxtRecordFilterSet(BaseFilterSet):
 class LocRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Location records."""
 
+    q = SearchFilter(filter_predicates={"label": "icontains"})
+
     class Meta:
         model = LocRecord
         fields = [
@@ -52,6 +60,13 @@ class LocRecordFilterSet(BaseFilterSet):
 class PtrRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Ptr records."""
 
+    q = SearchFilter(
+        filter_predicates={
+            "address__address": "icontains",
+            "record__label": "icontains",
+        }
+    )
+
     class Meta:
         model = PtrRecord
         fields = ["address", "record"]
@@ -60,6 +75,8 @@ class PtrRecordFilterSet(BaseFilterSet):
 class SshfpRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Sshfp records."""
 
+    q = SearchFilter(filter_predicates={"label": "icontains", "fingerprint": "icontains"})
+
     class Meta:
         model = SshfpRecord
         fields = ["label", "fingerprint"]
@@ -67,6 +84,8 @@ class SshfpRecordFilterSet(BaseFilterSet):
 
 class SrvRecordFilterSet(BaseFilterSet):
     """FilterSet for filtering a set of Srv records."""
+
+    q = SearchFilter(filter_predicates={"label": "icontains", "target": "icontains"})
 
     class Meta:
         model = SrvRecord
