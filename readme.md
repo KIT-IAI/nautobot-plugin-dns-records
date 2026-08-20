@@ -27,6 +27,12 @@ The following requirements are needed for a setup:
 4. `poetry run python development/manage.py -c development/nautobot_config.py migrate`
 5. `poetry run python development/manage.py -c development/nautobot_config.py runserver`
 
+Run the isolated test suite with:
+
+`poetry run nautobot-server test --config-path development/nautobot_test_config.py nautobot_dns_records.tests --noinput`
+
+The test configuration uses a separate PostgreSQL test database and allows Django's test client hosts without changing the development instance.
+
 ## Setup
 
 1. Install the `nautobot-dns-records` package to your nautobot virtual environment
