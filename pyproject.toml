@@ -122,3 +122,6 @@ omit = [
   "nautobot_dns_records/migrations/*",
   "nautobot_dns_records/tests/*",
 ]
+
+[tool.coverage.report]
+fail_under = 80
