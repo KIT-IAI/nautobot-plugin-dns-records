@@ -1,8 +1,8 @@
 """Tests for DNS record API serializers."""
 
-from nautobot.apps.testing import TestCase
 from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory, override_settings
+from nautobot.apps.testing import TestCase
 from nautobot.extras.models import Status
 from nautobot.ipam.models import IPAddress
 
@@ -21,17 +21,18 @@ class SerializerTestCase(TestCase):
     def setUp(self):
         self.status = Status.objects.get(name="Active")
         self.status.content_types.add(ContentType.objects.get_for_model(CNameRecord))
-        self.ip_address = IPAddress.objects.filter(ip_version="4").first()
+        self.ipAddress = IPAddress.objects.filter(ip_version="4").first()
         self.request = RequestFactory().get("/", HTTP_HOST="localhost")
 
     def serialize(self, serializer_class, instance):
+        """Serialize an instance with a request context."""
         return serializer_class(instance, context={"request": self.request}).data
 
     def test_address_record_serializer_contains_expected_fields(self):
         record = AddressRecord.objects.create(
             label="www.example.test",
             ttl=3600,
-            address=self.ip_address,
+            address=self.ipAddress,
             status=self.status,
         )
 
@@ -58,12 +59,12 @@ class SerializerTestCase(TestCase):
         address_record = AddressRecord.objects.create(
             label="www.example.test",
             ttl=3600,
-            address=self.ip_address,
+            address=self.ipAddress,
             status=self.status,
         )
         record = PtrRecord.objects.create(
             ttl=3600,
-            address=self.ip_address,
+            address=self.ipAddress,
             record=address_record,
             status=self.status,
         )

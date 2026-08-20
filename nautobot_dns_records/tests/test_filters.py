@@ -21,11 +21,11 @@ class SearchFilterTestCase(TestCase):
 
     def setUp(self):
         self.status = Status.objects.get(name="Active")
-        self.ip_address = IPAddress.objects.filter(ip_version="4").first()
-        self.address_record = AddressRecord.objects.create(
+        self.ipAddress = IPAddress.objects.filter(ip_version="4").first()
+        self.addressRecord = AddressRecord.objects.create(
             label="www.example.test",
             ttl=3600,
-            address=self.ip_address,
+            address=self.ipAddress,
             status=self.status,
         )
 
@@ -42,12 +42,12 @@ class SearchFilterTestCase(TestCase):
 
         for filterset in filtersets:
             with self.subTest(filterset=filterset.__name__):
-                self.assertIn("q", filterset.base_filters)
+                self.assertIn("q", filterset.base_filters)  # pylint: disable=no-member
 
     def test_address_record_search_matches_label(self):
         results = AddressRecordFilterSet({"q": "www.example"}, queryset=AddressRecord.objects.all()).qs
 
-        self.assertQuerySetEqual(results, [self.address_record], transform=lambda record: record)
+        self.assertQuerySetEqual(results, [self.addressRecord], transform=lambda record: record)
 
     def test_cname_record_search_matches_target(self):
         record = CNameRecord.objects.create(
@@ -64,8 +64,8 @@ class SearchFilterTestCase(TestCase):
     def test_ptr_record_search_matches_address_record_label(self):
         ptr_record = PtrRecord.objects.create(
             ttl=3600,
-            address=self.ip_address,
-            record=self.address_record,
+            address=self.ipAddress,
+            record=self.addressRecord,
             status=self.status,
         )
 

@@ -51,4 +51,4 @@ class RecordFormTestCase(TestCase):
 
         for filter_form in filter_forms:
             with self.subTest(filter_form=filter_form.__name__):
-                self.assertIn("q", filter_form.base_fields)
+                self.assertIn("q", filter_form.base_fields)  # pylint: disable=no-member
