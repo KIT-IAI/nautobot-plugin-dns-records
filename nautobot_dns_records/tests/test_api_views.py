@@ -47,3 +47,12 @@ class AddressRecordViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(response.data["count"], 1)
         self.assertEqual(response.data["results"][0]["label"], self.record.label)
+
+    def test_list_search_filter_returns_matching_record(self):
+        request = APIRequestFactory().get("/api/plugins/dns/address-records/?q=api.example")
+        force_authenticate(request, user=self.user)
+        response = AddressRecordViewSet.as_view({"get": "list"})(request)
+
+        self.assertEqual(response.status_code, 200, response.data)
+        self.assertEqual(response.data["count"], 1)
+        self.assertEqual(response.data["results"][0]["label"], self.record.label)
