@@ -53,9 +53,19 @@ class Migration(migrations.Migration):
             ),
             preserve_default=False,
         ),
-        migrations.RemoveField(
-            model_name="ptrrecord",
-            name="label",
+        migrations.SeparateDatabaseAndState(
+            database_operations=[
+                migrations.RunSQL(
+                    sql='ALTER TABLE "nautobot_dns_records_ptrrecord" DROP COLUMN "label"',
+                    reverse_sql='ALTER TABLE "nautobot_dns_records_ptrrecord" ADD COLUMN "label" varchar(255)',
+                ),
+            ],
+            state_operations=[
+                migrations.RemoveField(
+                    model_name="ptrrecord",
+                    name="label",
+                ),
+            ],
         ),
         migrations.AddConstraint(
             model_name="ptrrecord",
