@@ -3,7 +3,6 @@
 from pathlib import Path
 import runpy
 
-
 _BASE_CONFIG = Path(__file__).with_name("nautobot_config.py")
 globals().update(runpy.run_path(_BASE_CONFIG))
 

@@ -1,4 +1,3 @@
-# pylint: disable=nb-use-fields-all
 """Table Views for DNS Models."""
 
 import django_tables2 as tables
