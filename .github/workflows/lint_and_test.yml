@@ -89,6 +89,6 @@ jobs:
       - name: Install all dependencies
         run: poetry install
       - name: Run the tests with coverage
-        run: poetry run nautobot-server test --config-path development/nautobot_test_config.py --noinput
+        run: poetry run coverage run development/manage.py -c development/nautobot_test_config.py test --keepdb --noinput
       - name: Report coverage
         run: poetry run coverage report
