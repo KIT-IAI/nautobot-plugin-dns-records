@@ -59,6 +59,8 @@ jobs:
           - 5432:5432
     env:
       NAUTOBOT_CONFIG: "${{ github.workspace }}/development/nautobot_test_config.py"
+      NAUTOBOT_POSTGRES_PORT: "5432"
+      NAUTOBOT_REDIS_PORT: "6379"
     steps:
       - uses: actions/checkout@v4
       - name: Setup redis
