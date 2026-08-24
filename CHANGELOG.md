@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1 - 2026-08-24
+
+### Fixed
+
+- Updated `python-dotenv` and `setuptools` to security-fixed versions.
+
 ## 0.5.0 - 2026-08-24
 
 ### Added
