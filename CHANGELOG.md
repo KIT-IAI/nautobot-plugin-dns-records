@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.2 - 2026-10-30
+
+### Changed
+
+- Updated the locked development and test environment to Nautobot 3.2.8 and its compatible dependencies.
+
+### Verified
+
+- Passed all 56 Nautobot tests with 88% coverage.
+
 ## 0.5.1 - 2026-08-24
 
 ### Fixed
